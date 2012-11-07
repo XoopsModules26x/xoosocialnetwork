@@ -13,7 +13,7 @@ code {
     display:             block;
 }
 .help-item {    margin-bottom:       20px;
-    display:             blockj;
+    display:             block;
 }
 .help-title {    width:               80%;
     margin-bottom:       10px;
@@ -35,5 +35,4 @@ code {
     right:               50px;
 }
 
-.help-description {    width:               100%;
-}
+.help-description {    width:               100%;}
