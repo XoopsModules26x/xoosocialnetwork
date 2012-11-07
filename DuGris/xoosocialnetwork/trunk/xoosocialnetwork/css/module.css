@@ -4,10 +4,10 @@
 .xooSocialNetwork img {
     width:        20px;
     opacity:      .3;
-    filter:       Alpha(opacity=30);
+    filter:       alpha(opacity=30);
 }
 
 .xooSocialNetwork img:hover {
     opacity:      1;
-    filter:       Alpha(opacity=100);
+    filter:       alpha(opacity=100);
 }
