@@ -3,13 +3,11 @@
 
 .xooSocialNetwork img {
     width:        20px;
-    MozOpacity:   .3;
     opacity:      .3;
     filter:       Alpha(opacity=30);
 }
 
 .xooSocialNetwork img:hover {
-    MozOpacity:   1;
     opacity:      1;
     filter:       Alpha(opacity=100);
 }
