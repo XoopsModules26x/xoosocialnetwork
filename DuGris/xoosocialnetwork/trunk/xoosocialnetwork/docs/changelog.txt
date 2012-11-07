@@ -1,0 +1,3 @@
+<br />
+<strong>2012-11</strong>
+System extension creation for xoops 2.6.0
