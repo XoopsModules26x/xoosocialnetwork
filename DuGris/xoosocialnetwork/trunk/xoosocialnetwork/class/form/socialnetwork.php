@@ -62,7 +62,7 @@ class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
         $query_string->setDatalist(array('t','title'));
         $this->addElement( $query_string );
 
-        // display
+        // order
         $this->addElement( new XoopsFormText(_AM_XOO_SN_ORDER, 'xoosocialnetwork_order', 1, 3, $this->xoopsObject->getVar('xoosocialnetwork_order')) );
 
         // display
