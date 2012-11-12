@@ -94,7 +94,7 @@ switch ($op) {    case 'save':
     $xoops->tpl->assign('socialnetwork', $socialnetwork );
     $admin_page = new XoopsModuleAdmin();
 
-    $admin_page->addItemButton(_AM_XOO_SN_ADD, 'index.php?op=add', $icon = 'add', $extra = '');
+    $admin_page->addItemButton(_AM_XOO_SN_ADD, 'index.php?op=add', 'add');
     ob_start();
     $admin_page->renderButton();
     $admin_button = ob_get_contents();
