@@ -33,8 +33,8 @@ class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
      * @return void
      */
     public function SocialnetworkForm()
-    {        global $xoops, $xoosocialnetwork_handler;
-
+    {        $xoops = Xoops::getInstance();
+        global $xoosocialnetwork_handler;
 
         include_once dirname(dirname ( __FILE__ )) . '/xoopreferences.php';
         $config = new XooSocialNetworkPreferences();
@@ -82,7 +82,7 @@ class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
         $this->addElement($button_tray);
     }
 
-    function message($msg, $title = '', $class='errorMsg' )
+    public function message($msg, $title = '', $class='errorMsg' )
     {
         $ret = "<div class='" . $class . "'>";
         if ( $title != '' ) {

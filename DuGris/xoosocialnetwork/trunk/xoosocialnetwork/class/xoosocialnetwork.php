@@ -54,8 +54,9 @@ class Xoosocialnetwork extends XoopsObject
     }
 
     public function toArray()
-    {        global $xoops;        include_once dirname ( __FILE__ ) . '/xoopreferences.php';
-        $config = new XooSocialNetworkPreferences();
+    {        $xoops = Xoops::getInstance();
+        XoopsLoad::load('xoopreferences', 'xoosocialnetwork');
+        $config = XooSocialNetworkPreferences::getInstance();
         $xooSocialNetwork_config = $config->config;
 
         $ret = $this->getValues();
@@ -64,9 +65,9 @@ class Xoosocialnetwork extends XoopsObject
         return $ret;
     }
 
-    function CleanVarsForDB()
+    public function CleanVarsForDB()
     {
-        global $system;
+        $system = System::getInstance();
         foreach ( $this->getValues() as $k => $v ) {
             if ( $k != 'dohtml' ) {
                 if ( $this->vars[$k]['data_type'] == XOBJ_DTYPE_STIME || $this->vars[$k]['data_type'] == XOBJ_DTYPE_MTIME || $this->vars[$k]['data_type'] == XOBJ_DTYPE_LTIME) {
@@ -91,7 +92,7 @@ class xoosocialnetworkxoosocialnetworkHandler extends XoopsPersistableObjectHand
 {
     public function __construct(&$db)
     {
-        $this->configPath = XOOPS_VAR_PATH . '/configs/';
+        $this->configPath = XOOPS_VAR_PATH . '/configs/xoosocialnetwork/';
         $this->configFile = 'xoosocialnetwork';
         $this->configFileExt = '.php';
 
@@ -115,7 +116,7 @@ class xoosocialnetworkxoosocialnetworkHandler extends XoopsPersistableObjectHand
         return $this->getObjects($criteria, null, false);
     }
 
-    function loadConfig()
+    public function loadConfig()
     {
         $cached_config = $this->readConfig();
         if (empty($cached_config)) {
@@ -124,7 +125,7 @@ class xoosocialnetworkxoosocialnetworkHandler extends XoopsPersistableObjectHand
         return $cached_config;
     }
 
-    function readConfig()
+    public function readConfig()
     {
         $path_file = $this->configPath . $this->configFile . $this->configFileExt;
         XoopsLoad::load('XoopsFile');
@@ -132,12 +133,11 @@ class xoosocialnetworkxoosocialnetworkHandler extends XoopsPersistableObjectHand
         return eval(@$file->read());
     }
 
-    function createConfig()
-    {        $this->writeConfig( $this->getDisplayed() );
-        return $cached_config;
+    public function createConfig()
+    {        return $this->writeConfig( $this->getDisplayed() );
     }
 
-    function writeConfig($data)
+    public function writeConfig($data)
     {        $path_file = $this->configPath . $this->configFile . $this->configFileExt;
         XoopsLoad::load('XoopsFile');
         $file = XoopsFile::getHandler('file', $path_file);

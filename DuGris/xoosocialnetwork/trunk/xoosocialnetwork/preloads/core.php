@@ -21,7 +21,7 @@ defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
 class XooSocialNetworkCorePreload extends XoopsPreloadItem
 {    static public function eventCoreFooterStart($args)
-    {        global $xoops;
+    {        $xoops = Xoops::getInstance();
         if ( isset($xoops->module) && is_object($xoops->module) && basename( $xoops->getEnv('PHP_SELF') ) != 'index.php') {            if (XooSocialNetworkCorePreload::isActive()) {                if ( $xoops->getEnv('QUERY_STRING') ) {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF') . '?' . urlencode($xoops->getEnv('QUERY_STRING'));                } else {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF');
                 }
 
