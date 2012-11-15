@@ -42,7 +42,7 @@ class XooSocialNetworkCorePreload extends XoopsPreloadItem
     }
 
     static private function isActive()
-    {        global $xoops;
+    {        $xoops = Xoops::getInstance();
         $module_handler = $xoops->getHandlerModule();
         $module = $module_handler->getByDirname('xoosocialnetwork');
         return ($module && $module->getVar('isactive')) ? true : false;
