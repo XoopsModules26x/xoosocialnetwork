@@ -31,6 +31,7 @@ if ( isset( $_GET ) ){
     }
 }
 
+XoopsLoad::load('xoopreferences', 'xoosocialnetwork');
 XoopsLoad::load('system', 'system');
 $system = System::getInstance();
 

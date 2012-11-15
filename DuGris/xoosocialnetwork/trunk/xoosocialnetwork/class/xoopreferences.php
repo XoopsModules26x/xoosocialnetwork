@@ -53,6 +53,11 @@ class XooSocialNetworkPreferences
         return $instance;
     }
 
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
     /**
      * XooSocialNetworkPreferences::loadConfig()
      *

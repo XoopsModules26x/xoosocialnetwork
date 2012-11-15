@@ -54,10 +54,7 @@ class Xoosocialnetwork extends XoopsObject
     }
 
     public function toArray()
-    {        $xoops = Xoops::getInstance();
-        XoopsLoad::load('xoopreferences', 'xoosocialnetwork');
-        $config = XooSocialNetworkPreferences::getInstance();
-        $xooSocialNetwork_config = $config->config;
+    {        $xoops = Xoops::getInstance();        $xooSocialNetwork_config = XooSocialNetworkPreferences::getInstance()->getConfig();
 
         $ret = $this->getValues();
         if ( $ret['xoosocialnetwork_image'] != 'blank.gif' ) {            $ret['xoosocialnetwork_image_link'] = $xoops->url('modules/xoosocialnetwork/icons/' . $xooSocialNetwork_config['xoosocialnetwork_theme']) . '/' . $ret['xoosocialnetwork_image'];
