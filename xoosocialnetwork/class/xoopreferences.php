@@ -28,10 +28,10 @@ class XooSocialNetworkPreferences
     private $module_dirname = 'xoosocialnetwork';
 
     public function __construct()
-    {        global $xoops;
+    {        $xoops = Xoops::getInstance();
         $this->configFile = 'config.' . $this->module_dirname . '.php';
 
-        $this->configPath = XOOPS_VAR_PATH . '/configs/';
+        $this->configPath = XOOPS_VAR_PATH . '/configs/xoosocialnetwork/';
 
         $this->basicConfig = $this->loadBasicConfig();
         $this->config = @$this->loadConfig();
@@ -43,12 +43,22 @@ class XooSocialNetworkPreferences
     public function XooSocialNetworkPreferences()
     {        $this->__construct();    }
 
+    static public function getInstance()
+    {
+        static $instance;
+        if (!isset($instance)) {
+            $class = __CLASS__;
+            $instance = new $class();
+        }
+        return $instance;
+    }
+
     /**
      * XooSocialNetworkPreferences::loadConfig()
      *
      * @return array
      */
-    function loadConfig() {
+    public function loadConfig() {
         if ( !$config = $this->readConfig() ) {
             $config = $this->loadBasicConfig();
             $this->writeConfig($config );
@@ -62,7 +72,7 @@ class XooSocialNetworkPreferences
      *
      * @return array
      */
-    function loadBasicConfig()
+    public function loadBasicConfig()
     {
         if (file_exists($file_path = dirname(dirname( __FILE__ )) . '/include/' . $this->configFile)) {
             $config = include $file_path;
@@ -75,7 +85,7 @@ class XooSocialNetworkPreferences
      *
      * @return array
      */
-    function readConfig()
+    public function readConfig()
     {
         $file_path = $this->configPath . $this->configFile;
         XoopsLoad::load('XoopsFile');
@@ -90,7 +100,7 @@ class XooSocialNetworkPreferences
      * @param array $config
      * @return array
      */
-    function writeConfig($config)
+    public function writeConfig($config)
     {
         $file_path = $this->configPath . $this->configFile;
         XoopsLoad::load('XoopsFile');

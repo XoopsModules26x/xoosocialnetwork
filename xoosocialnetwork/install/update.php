@@ -14,9 +14,15 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
+ * @version         $Id: update.php 1004 2012-10-30 23:09:12Z DuGris $
  */
 
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
-$xoops->footer();
+
+include_once XOOPS_ROOT_PATH . "/modules/xoosocialnetwork/install/install.php";
+
+function xoops_module_update_xoosocialnetwork()
+{
+    return xoops_module_install_xoosocialnetwork();
+}
 ?>
