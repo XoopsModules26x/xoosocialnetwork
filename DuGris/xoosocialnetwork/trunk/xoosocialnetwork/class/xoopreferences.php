@@ -31,7 +31,7 @@ class XooSocialNetworkPreferences
     {        $xoops = Xoops::getInstance();
         $this->configFile = 'config.' . $this->module_dirname . '.php';
 
-        $this->configPath = XOOPS_VAR_PATH . '/configs/xoosocialnetwork/';
+        $this->configPath = XOOPS_VAR_PATH . '/configs/' . $this->module_dirname . '/';
 
         $this->basicConfig = $this->loadBasicConfig();
         $this->config = @$this->loadConfig();
