@@ -19,11 +19,7 @@
 
 include dirname(__FILE__) . '/header.php';
 
-$xoops->header();
-$admin_page = new XoopsModuleAdmin();
-
-$admin_page->renderNavigation('about.php');
-$admin_page->renderAbout();
+$admin_page->displayAbout();
 
 include dirname(__FILE__) . '/footer.php';
 ?>

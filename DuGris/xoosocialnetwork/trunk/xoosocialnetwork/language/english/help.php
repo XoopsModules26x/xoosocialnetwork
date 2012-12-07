@@ -41,7 +41,9 @@ define("_HELP_TUTORIAL_CONTENT",           "
         Add in your template
         <br />
         <code>
-            &lt;{includeq file='module:xoosocialnetwork|xoosocialnetwork.html'}&gt;
+            &lt;{if $xoosocialnetwork}&gt;
+                &lt;{includeq file='module:xoosocialnetwork|xoosocialnetwork.html'}&gt;
+            &lt;{/if}&gt;
         </code>
 ");
 ?>

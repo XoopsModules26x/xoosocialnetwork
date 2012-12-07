@@ -53,10 +53,10 @@ class Xoosocialnetwork extends XoopsObject
         return true;
     }
 
-    public function toArray()
+    public function getValues($keys = null, $format = null, $maxDepth = null)
     {        $xoops = Xoops::getInstance();        $xooSocialNetwork_config = XooSocialNetworkPreferences::getInstance()->getConfig();
 
-        $ret = $this->getValues();
+        $ret = parent::getValues();
         if ( $ret['xoosocialnetwork_image'] != 'blank.gif' ) {            $ret['xoosocialnetwork_image_link'] = $xoops->url('modules/xoosocialnetwork/icons/' . $xooSocialNetwork_config['xoosocialnetwork_theme']) . '/' . $ret['xoosocialnetwork_image'];
         }
         return $ret;
@@ -100,7 +100,6 @@ class xoosocialnetworkxoosocialnetworkHandler extends XoopsPersistableObjectHand
     {        $criteria = new CriteriaCompo();
         $criteria->setSort( 'xoosocialnetwork_order' );
         $criteria->setOrder( 'asc' );
-
         return $this->getObjects($criteria, null, false);
     }
 
