@@ -30,6 +30,7 @@ if ( isset( $_GET ) ){
         ${$k} = $v;
     }
 }
+$script_name = basename($_SERVER['SCRIPT_NAME'], '.php');
 
 XoopsLoad::load('xoopreferences', 'xoosocialnetwork');
 XoopsLoad::load('system', 'system');
@@ -37,7 +38,14 @@ $system = System::getInstance();
 
 $xoops = Xoops::getInstance();
 $xoops->header();
-$xoops->theme->addStylesheet('modules/xoosocialnetwork/css/moduladmin.css');
+$xoops->theme()->addStylesheet('modules/xoosocialnetwork/css/moduladmin.css');
+
+$admin_page = new XoopsModuleAdmin();
+if ($script_name != 'about' && $script_name != 'index') {
+    $admin_page->renderNavigation( basename($_SERVER['SCRIPT_NAME']) );
+} elseif ($script_name != 'index') {
+    $admin_page->displayNavigation( basename($_SERVER['SCRIPT_NAME']) );
+}
 
 $xoosocialnetwork_handler = $xoops->getModuleHandler('xoosocialnetwork', 'xoosocialnetwork');
 ?>

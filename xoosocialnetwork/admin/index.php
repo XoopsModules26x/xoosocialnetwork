@@ -20,8 +20,8 @@
 include dirname(__FILE__) . '/header.php';
 
 switch ($op) {    case 'save':
-    if ( !$xoops->security->check() ) {
-        $xoops->redirect('index.php', 5, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+    if ( !$xoops->security()->check() ) {
+        $xoops->redirect('index.php', 5, implode(',', $xoops->security()->getErrors()));
     }
 
     $xoosocialnetwork_id = $system->CleanVars($_POST, 'xoosocialnetwork_id', 0, 'int');
@@ -43,14 +43,8 @@ switch ($op) {    case 'save':
     $form = $xoops->getModuleForm($data, 'socialnetwork', 'xoosocialnetwork');
     $form->SocialnetworkForm();
 
-    ob_start();
-    $form->render();
-    $form_render = ob_get_contents();
-    ob_end_clean();
-
-    $admin_page = new XoopsModuleAdmin();
     $admin_page->addInfoBox(_AM_XOO_SN_ADD);
-    $admin_page->addInfoBoxLine( $form_render );
+    $admin_page->addInfoBoxLine( $form->render() );
     break;
 
     case 'edit':
@@ -58,14 +52,8 @@ switch ($op) {    case 'save':
     $form = $xoops->getModuleForm($data, 'socialnetwork', 'xoosocialnetwork');
     $form->SocialnetworkForm();
 
-    ob_start();
-    $form->render();
-    $form_render = ob_get_contents();
-    ob_end_clean();
-
-    $admin_page = new XoopsModuleAdmin();
     $admin_page->addInfoBox(_AM_XOO_SN_EDIT . ' : ' . $data->getVar('xoosocialnetwork_title'));
-    $admin_page->addInfoBoxLine( $form_render );
+    $admin_page->addInfoBoxLine( $form->render() );
     break;
 
     case 'view':
@@ -91,21 +79,18 @@ switch ($op) {    case 'save':
 
     default:
     $socialnetwork = $xoosocialnetwork_handler->renderAdminList();
-    $xoops->tpl->assign('socialnetwork', $socialnetwork );
-    $admin_page = new XoopsModuleAdmin();
+    $xoops->tpl()->assign('socialnetwork', $socialnetwork );
 
     $admin_page->addItemButton(_AM_XOO_SN_ADD, 'index.php?op=add', 'add');
     ob_start();
-    $admin_page->renderButton();
+    $admin_page->displayButton();
     $admin_button = ob_get_contents();
     ob_end_clean();
 
     $admin_page->addInfoBox(_AM_XOO_SN_MANAGER);
-    $admin_page->addInfoBoxLine( $admin_button );
-    $admin_page->addInfoBoxLine( $xoops->tpl->fetch('admin:xoosocialnetwork|xoosocialnetwork_index.html') );
-
+    $admin_page->addInfoBoxLine( $xoops->tpl()->fetch('admin:xoosocialnetwork|xoosocialnetwork_index.html') );
     break;
 }
-$admin_page->renderIndex();
+$admin_page->displayIndex();
 include dirname(__FILE__) . '/footer.php';
 ?>

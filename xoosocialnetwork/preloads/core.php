@@ -20,7 +20,7 @@
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
 class XooSocialNetworkCorePreload extends XoopsPreloadItem
-{    static public function eventCoreFooterStart($args)
+{    static public function eventCoreHeaderAddmeta($args)
     {        $xoops = Xoops::getInstance();
         XoopsLoad::load('xoopreferences', 'xoosocialnetwork');
         if ( isset($xoops->module) && is_object($xoops->module) && basename( $xoops->getEnv('PHP_SELF') ) != 'index.php') {            if (XooSocialNetworkCorePreload::isActive()) {                if ( $xoops->getEnv('QUERY_STRING') ) {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF') . '?' . urlencode($xoops->getEnv('QUERY_STRING'));                } else {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF');
@@ -33,11 +33,12 @@ class XooSocialNetworkCorePreload extends XoopsPreloadItem
                     $sn[$k]['xoosocialnetwork_url']       .= $url;
                     if ( $v['xoosocialnetwork_query_title'] != '' ) {                        $sn[$k]['xoosocialnetwork_url']       .= '&amp;';
                         $sn[$k]['xoosocialnetwork_url']       .= $v['xoosocialnetwork_query_title'] . '=' ;
-                        $sn[$k]['xoosocialnetwork_url']       .= rawurlencode( $xoops->tpl->_tpl_vars['xoops_pagetitle'] ) ;
+                        $sn[$k]['xoosocialnetwork_url']       .= rawurlencode( $xoops->tpl()->_tpl_vars['xoops_pagetitle'] ) ;
                     }
                 }
-
-                $xoops->tpl->assign('xoosocialnetwork', $sn );
+                if ( count($sn)>0 ) {
+                    $xoops->tpl()->assign('xoosocialnetwork', $sn );
+                }
             }
         }
     }
