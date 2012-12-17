@@ -87,7 +87,7 @@ class Xoosocialnetwork extends XoopsObject
 
 class xoosocialnetworkxoosocialnetworkHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(&$db)
+    public function __construct($db)
     {
         $this->configPath = XOOPS_VAR_PATH . '/configs/xoosocialnetwork/';
         $this->configFile = 'xoosocialnetwork';
