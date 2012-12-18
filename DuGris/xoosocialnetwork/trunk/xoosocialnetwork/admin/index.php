@@ -40,8 +40,7 @@ switch ($op) {    case 'save':
 
     case 'add':
     $data = $xoosocialnetwork_handler->create();
-    $form = $xoops->getModuleForm($data, 'socialnetwork', 'xoosocialnetwork');
-    $form->SocialnetworkForm();
+    $form = $xoosn_module->getForm($data, 'socialnetwork');
 
     $admin_page->addInfoBox(_AM_XOO_SN_ADD);
     $admin_page->addInfoBoxLine( $form->render() );
@@ -49,8 +48,7 @@ switch ($op) {    case 'save':
 
     case 'edit':
     $data = $xoosocialnetwork_handler->get($xoosocialnetwork_id);
-    $form = $xoops->getModuleForm($data, 'socialnetwork', 'xoosocialnetwork');
-    $form->SocialnetworkForm();
+    $form = $xoosn_module->getForm($data, 'socialnetwork');
 
     $admin_page->addInfoBox(_AM_XOO_SN_EDIT . ' : ' . $data->getVar('xoosocialnetwork_title'));
     $admin_page->addInfoBoxLine( $form->render() );

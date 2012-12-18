@@ -19,125 +19,22 @@
 
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
-class Xoosocialnetwork extends XoopsObject
+class Xoosocialnetwork extends Xoops_Module_Abstract
 {
-    // constructor
-	public function __construct()
-	{
-		$this->initVar('xoosocialnetwork_id'          , XOBJ_DTYPE_INT     , 0            , false , 11);
-		$this->initVar('xoosocialnetwork_title'       , XOBJ_DTYPE_TXTBOX  , ''           , true  , 100);
-		$this->initVar('xoosocialnetwork_url'         , XOBJ_DTYPE_TXTBOX  , ''           , true  , 100);
-		$this->initVar('xoosocialnetwork_image'       , XOBJ_DTYPE_TXTBOX  , ''           , true  , 100);
-		$this->initVar('xoosocialnetwork_query_url'   , XOBJ_DTYPE_TXTBOX  , ''           , true  , 20);
-		$this->initVar('xoosocialnetwork_query_title' , XOBJ_DTYPE_TXTBOX  , ''           , true  , 20);
-		$this->initVar('xoosocialnetwork_display'     , XOBJ_DTYPE_INT     , 1            , true  , 1);
-		$this->initVar('xoosocialnetwork_order'       , XOBJ_DTYPE_INT     , 1            , true  , 3);
-
-        // Pour autoriser le html
-//        $this->initVar('dohtml', XOBJ_DTYPE_INT, 1, false);
-	}
-
-    private function Xoosocialnetwork()
+    /**
+     * Init the module
+     *
+     * @return null|void
+     */
+    public function init()
     {
-        $this->__construct();
+        $this->setDirname('xoosocialnetwork');
     }
 
-    public function setView()
+    public function LoadConfig()
     {
-        $this->setVar('xoosocialnetwork_display', 1);
-        return true;
-    }
-
-    public function setHide()
-    {        $this->setVar('xoosocialnetwork_display', 0);
-        return true;
-    }
-
-    public function getValues($keys = null, $format = null, $maxDepth = null)
-    {        $xoops = Xoops::getInstance();        $xooSocialNetwork_config = XooSocialNetworkPreferences::getInstance()->getConfig();
-
-        $ret = parent::getValues();
-        if ( $ret['xoosocialnetwork_image'] != 'blank.gif' ) {            $ret['xoosocialnetwork_image_link'] = $xoops->url('modules/xoosocialnetwork/icons/' . $xooSocialNetwork_config['xoosocialnetwork_theme']) . '/' . $ret['xoosocialnetwork_image'];
-        }
-        return $ret;
-    }
-
-    public function CleanVarsForDB()
-    {
-        $system = System::getInstance();
-        foreach ( $this->getValues() as $k => $v ) {
-            if ( $k != 'dohtml' ) {
-                if ( $this->vars[$k]['data_type'] == XOBJ_DTYPE_STIME || $this->vars[$k]['data_type'] == XOBJ_DTYPE_MTIME || $this->vars[$k]['data_type'] == XOBJ_DTYPE_LTIME) {
-                    $value = $system->CleanVars($_POST[$k], 'date', date('Y-m-d'), 'date') + $system->CleanVars($_POST[$k], 'time', date('u'), 'int');
-                    $this->setVar( $k,  isset( $_POST[$k] ) ? $value : $v );
-                } elseif ( $this->vars[$k]['data_type'] == XOBJ_DTYPE_INT ) {
-                    $value = $system->CleanVars($_POST, $k, $v, 'int');
-                    $this->setVar( $k,  $value );
-                } elseif ( $this->vars[$k]['data_type'] == XOBJ_DTYPE_ARRAY ) {
-                    $value = $system->CleanVars($_POST, $k, $v, 'array');
-                    $this->setVar( $k,  $value );
-                } else {
-                    $value = $system->CleanVars($_POST, $k, $v, 'string');
-                    $this->setVar( $k,  $value );
-                }
-            }
-        }
-    }
-}
-
-class xoosocialnetworkxoosocialnetworkHandler extends XoopsPersistableObjectHandler
-{
-    public function __construct($db)
-    {
-        $this->configPath = XOOPS_VAR_PATH . '/configs/xoosocialnetwork/';
-        $this->configFile = 'xoosocialnetwork';
-        $this->configFileExt = '.php';
-
-        parent::__construct($db, 'xoosocialnetwork', 'Xoosocialnetwork', 'xoosocialnetwork_id', 'xoosocialnetwork_title');
-    }
-
-    public function renderAdminList()
-    {        $criteria = new CriteriaCompo();
-        $criteria->setSort( 'xoosocialnetwork_order' );
-        $criteria->setOrder( 'asc' );
-        return $this->getObjects($criteria, null, false);
-    }
-
-    public function getDisplayed()
-    {
-        $criteria = new CriteriaCompo();
-        $criteria->add( new Criteria('xoosocialnetwork_display', 1) ) ;
-        $criteria->setSort( 'xoosocialnetwork_order' );
-        $criteria->setOrder( 'asc' );
-        return $this->getObjects($criteria, null, false);
-    }
-
-    public function loadConfig()
-    {
-        $cached_config = $this->readConfig();
-        if (empty($cached_config)) {
-            $cached_config = $this->createConfig();
-        }
-        return $cached_config;
-    }
-
-    public function readConfig()
-    {
-        $path_file = $this->configPath . $this->configFile . $this->configFileExt;
-        XoopsLoad::load('XoopsFile');
-        $file = XoopsFile::getHandler('file', $path_file);
-        return eval(@$file->read());
-    }
-
-    public function createConfig()
-    {        return $this->writeConfig( $this->getDisplayed() );
-    }
-
-    public function writeConfig($data)
-    {        $path_file = $this->configPath . $this->configFile . $this->configFileExt;
-        XoopsLoad::load('XoopsFile');
-        $file = XoopsFile::getHandler('file', $path_file);
-        return $file->write( "return " . var_export($data, true) . ";");
+        XoopsLoad::load('xoopreferences', $this->_dirname);
+        return XooSocialnetworkPreferences::getInstance()->getConfig();
     }
 }
 ?>

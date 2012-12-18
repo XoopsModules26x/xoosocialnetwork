@@ -14,7 +14,7 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id: install.php 1088 2012-11-09 23:45:14Z DuGris $
+ * @version         $Id$
  */
 
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
@@ -34,7 +34,6 @@ function xoops_module_install_xoosocialnetwork()
             }
         }
     }
-    xoosocialnetwork_mkdirs($xoops->path(XOOPS_VAR_PATH) . '/configs/xoosocialnetwork');
     return true;
 }
 

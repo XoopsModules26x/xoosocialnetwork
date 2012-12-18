@@ -14,7 +14,7 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id: update.php 1004 2012-10-30 23:09:12Z DuGris $
+ * @version         $Id$
  */
 
 defined('XOOPS_ROOT_PATH') or die('Restricted access');

@@ -26,19 +26,10 @@ class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
      */
     public function __construct($obj = null)
     {        $this->xoopsObject = $obj;
-    }
 
-    /**
-     * Maintenance Form
-     * @return void
-     */
-    public function SocialnetworkForm()
-    {        $xoops = Xoops::getInstance();
-        global $xoosocialnetwork_handler;
-
-        include_once dirname(dirname ( __FILE__ )) . '/xoopreferences.php';
-        $config = new XooSocialNetworkPreferences();
-        $xoosocialnetwork_config = $config->config;
+        $xoosn_module = Xoosocialnetwork::getInstance();
+        $xoosocialnetwork_handler = $xoosn_module->getHandler('xoosocialnetwork_sn');
+        $xoosocialnetwork_config =  $xoosn_module->LoadConfig();
 
         if ($this->xoopsObject->isNew() ) {
             parent::__construct('', 'form_socialnetwork', 'index.php', 'post', true);
@@ -50,7 +41,7 @@ class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
         $this->addElement( new XoopsFormText(_AM_XOO_SN_TITLE, 'xoosocialnetwork_title', 5, 255, $this->xoopsObject->getVar('xoosocialnetwork_title')) , true );
 
         // Url
-        $this->addElement( new XoopsFormText(_AM_XOO_SN_URL, 'xoosocialnetwork_url', 8, 255, $this->xoopsObject->getVar('xoosocialnetwork_url')) , true );
+        $this->addElement( new XoopsFormText(_AM_XOO_SN_URL, 'xoosocialnetwork_url', 7, 255, $this->xoopsObject->getVar('xoosocialnetwork_url')) , true );
 
         // Query string URL
         $query_url = new XoopsFormText(_AM_XOO_SN_QUERY_URL, 'xoosocialnetwork_query_url', 5, 20, $this->xoopsObject->getVar('xoosocialnetwork_query_url'));
