@@ -22,12 +22,12 @@ defined('XOOPS_ROOT_PATH') or die('Restricted access');
 class XooSocialNetworkCorePreload extends XoopsPreloadItem
 {    static public function eventCoreHeaderAddmeta($args)
     {        $xoops = Xoops::getInstance();
-        $xoosn_module = Xoosocialnetwork::getInstance();
+        $sn_module = Xoosocialnetwork::getInstance();
         if ( isset($xoops->module) && is_object($xoops->module) && basename( $xoops->getEnv('PHP_SELF') ) != 'index.php') {            if (XooSocialNetworkCorePreload::isActive()) {                if ( $xoops->getEnv('QUERY_STRING') ) {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF') . '?' . urlencode($xoops->getEnv('QUERY_STRING'));                } else {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF');
                 }
 
-                $xoosocialnetwork_handler = $xoosn_module->getHandler('xoosocialnetwork_sn');
-                foreach ( $xoosocialnetwork_handler->loadConfig() as $k => $v ) {                    $sn[$k]['xoosocialnetwork_title']      = $v['xoosocialnetwork_title'];
+                $sn_handler = $sn_module->getHandler('xoosocialnetwork_sn');
+                foreach ( $sn_handler->loadConfig() as $k => $v ) {                    $sn[$k]['xoosocialnetwork_title']      = $v['xoosocialnetwork_title'];
                     $sn[$k]['xoosocialnetwork_image_link'] = $v['xoosocialnetwork_image_link'];                    $sn[$k]['xoosocialnetwork_url']        = $v['xoosocialnetwork_url'] . '?';
                     $sn[$k]['xoosocialnetwork_url']       .= $v['xoosocialnetwork_query_url'] . '=';
                     $sn[$k]['xoosocialnetwork_url']       .= $url;

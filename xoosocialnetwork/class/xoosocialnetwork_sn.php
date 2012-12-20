@@ -55,10 +55,10 @@ class Xoosocialnetwork_sn extends XoopsObject
 
     public function getValues($keys = null, $format = null, $maxDepth = null)
     {        $xoops = Xoops::getInstance();
-        $xoosn_module = Xoosocialnetwork::getInstance();        $xooSocialNetwork_config = $xoosn_module->LoadConfig();
+        $sn_module = Xoosocialnetwork::getInstance();        $sn_config = $sn_module->LoadConfig();
 
         $ret = parent::getValues();
-        if ( $ret['xoosocialnetwork_image'] != 'blank.gif' ) {            $ret['xoosocialnetwork_image_link'] = $xoops->url('modules/xoosocialnetwork/icons/' . $xooSocialNetwork_config['xoosocialnetwork_theme']) . '/' . $ret['xoosocialnetwork_image'];
+        if ( $ret['xoosocialnetwork_image'] != 'blank.gif' ) {            $ret['xoosocialnetwork_image_link'] = $xoops->url('modules/xoosocialnetwork/icons/' . $sn_config['xoosocialnetwork_theme']) . '/' . $ret['xoosocialnetwork_image'];
         }
         return $ret;
     }
