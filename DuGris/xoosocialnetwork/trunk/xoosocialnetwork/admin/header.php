@@ -47,6 +47,6 @@ if ($script_name != 'about' && $script_name != 'index') {
     $admin_page->displayNavigation( basename($_SERVER['SCRIPT_NAME']) );
 }
 
-$xoosn_module = Xoosocialnetwork::getInstance();
-$xoosocialnetwork_handler = $xoosn_module->getHandler('xoosocialnetwork_sn');
+$sn_module = Xoosocialnetwork::getInstance();
+$sn_handler = $sn_module->getHandler('xoosocialnetwork_sn');
 ?>

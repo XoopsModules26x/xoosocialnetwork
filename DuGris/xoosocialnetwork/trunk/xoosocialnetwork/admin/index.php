@@ -26,57 +26,57 @@ switch ($op) {    case 'save':
 
     $xoosocialnetwork_id = $system->CleanVars($_POST, 'xoosocialnetwork_id', 0, 'int');
     if( isset($xoosocialnetwork_id) && $xoosocialnetwork_id > 0 ){
-        $data = $xoosocialnetwork_handler->get($xoosocialnetwork_id);
+        $data = $sn_handler->get($xoosocialnetwork_id);
     } else {
-        $data = $xoosocialnetwork_handler->create();
+        $data = $sn_handler->create();
     }
     $data->CleanVarsForDB();
 
-    if ($xoosocialnetwork_handler->insert($data)) {
-        $xoosocialnetwork_handler->createConfig();
+    if ($sn_handler->insert($data)) {
+        $sn_handler->createConfig();
         $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
     }
     break;
 
     case 'add':
-    $data = $xoosocialnetwork_handler->create();
-    $form = $xoosn_module->getForm($data, 'socialnetwork');
+    $data = $sn_handler->create();
+    $form = $sn_module->getForm($data, 'socialnetwork');
 
     $admin_page->addInfoBox(_AM_XOO_SN_ADD);
     $admin_page->addInfoBoxLine( $form->render() );
     break;
 
     case 'edit':
-    $data = $xoosocialnetwork_handler->get($xoosocialnetwork_id);
-    $form = $xoosn_module->getForm($data, 'socialnetwork');
+    $data = $sn_handler->get($xoosocialnetwork_id);
+    $form = $sn_module->getForm($data, 'socialnetwork');
 
     $admin_page->addInfoBox(_AM_XOO_SN_EDIT . ' : ' . $data->getVar('xoosocialnetwork_title'));
     $admin_page->addInfoBoxLine( $form->render() );
     break;
 
     case 'view':
-    $data = $xoosocialnetwork_handler->get($xoosocialnetwork_id);
+    $data = $sn_handler->get($xoosocialnetwork_id);
     $data->setView();
-    $xoosocialnetwork_handler->insert($data);
-    $xoosocialnetwork_handler->createConfig();
+    $sn_handler->insert($data);
+    $sn_handler->createConfig();
     $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
     break;
 
     case 'hide':
-    $data = $xoosocialnetwork_handler->get($xoosocialnetwork_id);
+    $data = $sn_handler->get($xoosocialnetwork_id);
     $data->setHide();
-    $xoosocialnetwork_handler->insert($data);
-    $xoosocialnetwork_handler->createConfig();
+    $sn_handler->insert($data);
+    $sn_handler->createConfig();
     $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
     break;
 
     case 'createconfig':
-    $xoosocialnetwork_handler->createConfig();
+    $sn_handler->createConfig();
     $xoops->redirect('index.php', 5, _AM_XOO_SN_CREATED);
     break;
 
     default:
-    $socialnetwork = $xoosocialnetwork_handler->renderAdminList();
+    $socialnetwork = $sn_handler->renderAdminList();
     $xoops->tpl()->assign('socialnetwork', $socialnetwork );
 
     $admin_page->addItemButton(_AM_XOO_SN_ADD, 'index.php?op=add', 'add');
