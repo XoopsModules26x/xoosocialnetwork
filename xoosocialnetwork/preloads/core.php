@@ -26,7 +26,7 @@ class XooSocialNetworkCorePreload extends XoopsPreloadItem
         if ( isset($xoops->module) && is_object($xoops->module) && basename( $xoops->getEnv('PHP_SELF') ) != 'index.php') {            if (XooSocialNetworkCorePreload::isActive()) {                if ( $xoops->getEnv('QUERY_STRING') ) {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF') . '?' . urlencode($xoops->getEnv('QUERY_STRING'));                } else {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF');
                 }
 
-                $sn_handler = $sn_module->getHandler('xoosocialnetwork_sn');
+                $sn_handler = $sn_module->SNHandler();
                 foreach ( $sn_handler->loadConfig() as $k => $v ) {                    $sn[$k]['xoosocialnetwork_title']      = $v['xoosocialnetwork_title'];
                     $sn[$k]['xoosocialnetwork_image_link'] = $v['xoosocialnetwork_image_link'];                    $sn[$k]['xoosocialnetwork_url']        = $v['xoosocialnetwork_url'] . '?';
                     $sn[$k]['xoosocialnetwork_url']       .= $v['xoosocialnetwork_query_url'] . '=';
