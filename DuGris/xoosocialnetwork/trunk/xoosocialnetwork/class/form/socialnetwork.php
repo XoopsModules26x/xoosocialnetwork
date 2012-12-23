@@ -28,7 +28,7 @@ class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
     {        $this->xoopsObject = $obj;
 
         $sn_module = Xoosocialnetwork::getInstance();
-        $sn_handler = $sn_module->getHandler('xoosocialnetwork_sn');
+        $sn_handler = $sn_module->SNHandler();
 
         if ($this->xoopsObject->isNew() ) {
             parent::__construct('', 'form_socialnetwork', 'index.php', 'post', true);

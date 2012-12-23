@@ -48,5 +48,5 @@ if ($script_name != 'about' && $script_name != 'index') {
 }
 
 $sn_module = Xoosocialnetwork::getInstance();
-$sn_handler = $sn_module->getHandler('xoosocialnetwork_sn');
+$sn_handler = $sn_module->SNHandler();
 ?>

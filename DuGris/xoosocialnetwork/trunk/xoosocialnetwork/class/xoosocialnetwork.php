@@ -36,5 +36,8 @@ class Xoosocialnetwork extends Xoops_Module_Abstract
         XoopsLoad::load('xoopreferences', $this->_dirname);
         return XooSocialnetworkPreferences::getInstance()->getConfig();
     }
+
+    public function SNHandler()
+    {        return $this->getHandler('xoosocialnetwork_sn');    }
 }
 ?>
