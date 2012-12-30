@@ -19,7 +19,7 @@
 
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
-class Xoosocialnetwork extends Xoops_Module_Abstract
+class Xoosocialnetwork extends Xoops_Module_Helper_Abstract
 {
     /**
      * Init the module
