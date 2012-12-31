@@ -101,7 +101,7 @@ class XoosocialnetworkXoosocialnetwork_snHandler extends XoopsPersistableObjectH
     {        $criteria = new CriteriaCompo();
         $criteria->setSort( 'xoosocialnetwork_order' );
         $criteria->setOrder( 'asc' );
-        return $this->getObjects($criteria, null, false);
+        return $this->getObjects($criteria, true, false);
     }
 
     public function getDisplayed()
@@ -110,7 +110,7 @@ class XoosocialnetworkXoosocialnetwork_snHandler extends XoopsPersistableObjectH
         $criteria->add( new Criteria('xoosocialnetwork_display', 1) ) ;
         $criteria->setSort( 'xoosocialnetwork_order' );
         $criteria->setOrder( 'asc' );
-        return $this->getObjects($criteria, null, false);
+        return $this->getObjects($criteria, true, false);
     }
 
     public function loadConfig()
