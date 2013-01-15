@@ -9,6 +9,10 @@
 .xo-moduleadmin-image {    width:             16px;
 }
 
+.xo-window-data {
+    width: 100%;
+}
+
 code {
     display:           block;
     width:             95%;

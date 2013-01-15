@@ -52,6 +52,17 @@ class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
         $query_string->setDatalist(array('t','title'));
         $this->addElement( $query_string );
 
+        // image
+        $xoops = Xoops::getInstance();
+        $image_tray = new XoopsFormElementTray(_AM_XOO_SN_IMAGE, '' );
+        $image_array = XoopsLists :: getImgListAsArray( $xoops->path('modules/xoosocialnetwork/icons/Default'));
+        $image_select = new XoopsFormSelect( '', 'xoosocialnetwork_image', $this->xoopsObject->getVar('xoosocialnetwork_image') );
+        $image_select->addOptionArray( $image_array );
+        $image_select->setExtra( "onchange='showImgSelected(\"select_image\", \"xoosocialnetwork_image\", \"" . '/' . "\", \"\", \"" . $xoops->url('modules/xoosocialnetwork/icons/Default') . "\")'" );
+        $image_tray->addElement( $image_select );
+        $image_tray->addElement( new XoopsFormLabel( '', "<br /><img src='" . $xoops->url('modules/xoosocialnetwork/icons/Default/') . $this->xoopsObject->getVar('xoosocialnetwork_image') . "' name='select_image' id='select_image' alt='' />" ) );
+        $this->addElement( $image_tray );
+
         // order
         $this->addElement( new XoopsFormText(_AM_XOO_SN_ORDER, 'xoosocialnetwork_order', 1, 3, $this->xoopsObject->getVar('xoosocialnetwork_order')) );
 

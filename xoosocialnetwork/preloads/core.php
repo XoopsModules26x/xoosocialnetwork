@@ -23,7 +23,8 @@ class XooSocialNetworkCorePreload extends XoopsPreloadItem
 {    static public function eventCoreHeaderAddmeta($args)
     {        $xoops = Xoops::getInstance();
         $sn_module = Xoosocialnetwork::getInstance();
-        if ( isset($xoops->module) && is_object($xoops->module) && basename( $xoops->getEnv('PHP_SELF') ) != 'index.php') {            if (XooSocialNetworkCorePreload::isActive()) {                if ( $xoops->getEnv('QUERY_STRING') ) {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF') . '?' . urlencode($xoops->getEnv('QUERY_STRING'));                } else {                    $url = XOOPS_URL . $xoops->getEnv('PHP_SELF');
+        if ( isset($xoops->module) && is_object($xoops->module) && basename( $xoops->getEnv('PHP_SELF') ) != 'index.php') {            if (XooSocialNetworkCorePreload::isActive()) {                $url = $xoops->getEnv('HTTPS') ? 'https://' : 'http://';
+                $url .= $xoops->getEnv('SERVER_NAME');                if ( $xoops->getEnv('QUERY_STRING') ) {                    $url .= $xoops->getEnv('PHP_SELF') . '?' . urlencode($xoops->getEnv('QUERY_STRING'));                } else {                    $url .= $xoops->getEnv('PHP_SELF');
                 }
 
                 $sn_handler = $sn_module->SNHandler();
