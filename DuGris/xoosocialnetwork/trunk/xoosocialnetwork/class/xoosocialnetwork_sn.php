@@ -27,7 +27,7 @@ class Xoosocialnetwork_sn extends XoopsObject
 		$this->initVar('xoosocialnetwork_id'          , XOBJ_DTYPE_INT     , 0            , false , 11);
 		$this->initVar('xoosocialnetwork_title'       , XOBJ_DTYPE_TXTBOX  , ''           , true  , 100);
 		$this->initVar('xoosocialnetwork_url'         , XOBJ_DTYPE_TXTBOX  , ''           , true  , 100);
-		$this->initVar('xoosocialnetwork_image'       , XOBJ_DTYPE_TXTBOX  , ''           , true  , 100);
+		$this->initVar('xoosocialnetwork_image'       , XOBJ_DTYPE_TXTBOX  , 'blank.gif'  , true  , 100);
 		$this->initVar('xoosocialnetwork_query_url'   , XOBJ_DTYPE_TXTBOX  , ''           , true  , 20);
 		$this->initVar('xoosocialnetwork_query_title' , XOBJ_DTYPE_TXTBOX  , ''           , true  , 20);
 		$this->initVar('xoosocialnetwork_display'     , XOBJ_DTYPE_INT     , 1            , true  , 1);
