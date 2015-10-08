@@ -17,12 +17,14 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 include_once XOOPS_ROOT_PATH . '/modules/xoosocialnetwork/install/install.php';
 
+/**
+ * @return bool
+ */
 function xoops_module_update_xoosocialnetwork()
 {
     return xoops_module_install_xoosocialnetwork();
 }
-?>

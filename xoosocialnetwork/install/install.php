@@ -17,40 +17,54 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
+/**
+ * @return bool
+ */
 function xoops_module_install_xoosocialnetwork()
-{    $xoops = Xoops::getInstance();
-    $folders    = array();
-    $folders[]  = $xoops->path('uploads') . '/xoosocialnetwork/images';
-    $images     = array('index.html', 'blank.gif');
+{
+    $xoops     = Xoops::getInstance();
+    $folders   = array();
+    $folders[] = $xoops->path('uploads') . '/xoosocialnetwork/images';
+    $images    = array(
+        'index.html',
+        'blank.gif');
 
-    foreach ( $folders as $folder ) {        if ( !xoosocialnetwork_mkdirs($folder) ) {
+    foreach ($folders as $folder) {
+        if (!xoosocialnetwork_mkdirs($folder)) {
             return false;
         } else {
-            foreach ( $images as $image ) {                if ( !xoosocialnetwork_copyfile($xoops->path('uploads'), $image, $folder) ) {
+            foreach ($images as $image) {
+                if (!xoosocialnetwork_copyfile($xoops->path('uploads'), $image, $folder)) {
                     return false;
                 }
             }
         }
     }
+
     return true;
 }
 
-function xoosocialnetwork_mkdirs( $pathname, $pathout = XOOPS_ROOT_PATH )
+/**
+ * @param              $pathname
+ * @param mixed|string $pathout
+ * @return bool
+ */
+function xoosocialnetwork_mkdirs($pathname, $pathout = XOOPS_ROOT_PATH)
 {
-    $xoops = Xoops::getInstance();
-    $pathname = substr( $pathname, strlen(XOOPS_ROOT_PATH) );
-    $pathname = str_replace( DIRECTORY_SEPARATOR, '/', $pathname );
+    $xoops    = Xoops::getInstance();
+    $pathname = substr($pathname, strlen(XOOPS_ROOT_PATH));
+    $pathname = str_replace(DIRECTORY_SEPARATOR, '/', $pathname);
 
-    $dest = $pathout;
-    $paths = explode( '/', $pathname );
+    $dest  = $pathout;
+    $paths = explode('/', $pathname);
 
-    foreach ( $paths as $path ) {
-        if ( !empty( $path ) ) {
+    foreach ($paths as $path) {
+        if (!empty($path)) {
             $dest = $dest . '/' . $path;
-            if ( !is_dir( $dest ) ) {
-                if ( !mkdir( $dest , 0755 ) ) {
+            if (!is_dir($dest)) {
+                if (!mkdir($dest, 0755)) {
                     return false;
                 } else {
                     xoosocialnetwork_copyfile($xoops->path('uploads'), 'index.html', $dest);
@@ -58,21 +72,28 @@ function xoosocialnetwork_mkdirs( $pathname, $pathout = XOOPS_ROOT_PATH )
             }
         }
     }
+
     return true;
 }
 
-function xoosocialnetwork_copyfile( $folder_in, $source_file, $folder_out )
+/**
+ * @param $folder_in
+ * @param $source_file
+ * @param $folder_out
+ * @return bool
+ */
+function xoosocialnetwork_copyfile($folder_in, $source_file, $folder_out)
 {
-    if ( !is_dir($folder_out) ) {
-        if ( !xoosocialnetwork_mkdirs($folder_out) ) {
+    if (!is_dir($folder_out)) {
+        if (!xoosocialnetwork_mkdirs($folder_out)) {
             return false;
         }
     }
 
     // Simple copy for a file
-    if ( is_file($folder_in . '/' . $source_file) ) {
-        return copy($folder_in . '/' . $source_file, $folder_out . '/' . basename($source_file) );
+    if (is_file($folder_in . '/' . $source_file)) {
+        return copy($folder_in . '/' . $source_file, $folder_out . '/' . basename($source_file));
     }
+
     return false;
 }
-?>

@@ -17,16 +17,16 @@
  * @version         $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $op = '';
-if ( isset( $_POST ) ){
-    foreach ( $_POST as $k => $v )  {
+if (null !== $_POST) {
+    foreach ($_POST as $k => $v) {
         ${$k} = $v;
     }
 }
-if ( isset( $_GET ) ){
-    foreach ( $_GET as $k => $v )  {
+if (null !== $_GET) {
+    foreach ($_GET as $k => $v) {
         ${$k} = $v;
     }
 }
@@ -38,15 +38,14 @@ $system = System::getInstance();
 
 $xoops = Xoops::getInstance();
 $xoops->header();
-$xoops->theme()->addStylesheet('modules/xoosocialnetwork/css/moduladmin.css');
+$xoops->theme()->addStylesheet('modules/xoosocialnetwork/assets/css/moduladmin.css');
 
-$admin_page = new XoopsModuleAdmin();
-if ($script_name != 'about' && $script_name != 'index') {
-    $admin_page->renderNavigation( basename($_SERVER['SCRIPT_NAME']) );
-} elseif ($script_name != 'index') {
-    $admin_page->displayNavigation( basename($_SERVER['SCRIPT_NAME']) );
+$admin_page = new \Xoops\Module\Admin();
+if ('about' != $script_name && 'index' != $script_name) {
+    $admin_page->renderNavigation(basename($_SERVER['SCRIPT_NAME']));
+} elseif ('index' != $script_name) {
+    $admin_page->displayNavigation(basename($_SERVER['SCRIPT_NAME']));
 }
 
-$sn_module = Xoosocialnetwork::getInstance();
-$sn_handler = $sn_module->SNHandler();
-?>
+$snModule  = XooSocialNetwork::getInstance();
+$snHandler = $snModule->SNHandler();

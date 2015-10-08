@@ -17,27 +17,29 @@
  * @version         $Id$
  */
 
-$modversion['name']           = _MI_XOO_SN_NAME;
-$modversion['description']    = _MI_XOO_SN_DESC;
-$modversion['version']        = 1.00;
-$modversion['author']         = 'XooFoo - Laurent JEN';
-$modversion['nickname']       = 'aka DuGris';
-$modversion['credits']        = 'DuGris.XooFoo Project';
-$modversion['license']        = 'GNU GPL 2.0';
-$modversion['license_url']    = 'www.gnu.org/licenses/gpl-2.0.html/';
-$modversion['official']       = 1;
-$modversion['help']           = 'page=help';
-$modversion['image']          = 'images/xoosocialnetwork_logo.png';
-$modversion['dirname']        = 'xoosocialnetwork';
+$modversion                = array();
+$modversion['dirname']     = basename(__DIR__);
+$modversion['name']        = _MI_XOO_SN_NAME;
+$modversion['description'] = _MI_XOO_SN_DESC;
+$modversion['version']     = 1.00;
+$modversion['author']      = 'XooFoo - Laurent JEN';
+$modversion['nickname']    = 'aka DuGris';
+$modversion['credits']     = 'DuGris.XooFoo Project';
+$modversion['license']     = 'GNU GPL 2.0';
+$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html/';
+$modversion['official']    = 1;
+$modversion['help']        = 'page=help';
+$modversion['image']       = 'assets/images/logo.png';
 
 // about
-$modversion['release_date']        = '2012/11/01';
-$modversion['module_website_url']  = 'dugris.xoofoo.org';
-$modversion['module_website_name'] = 'XooFoo.org - Laurent JEN';
-$modversion['module_status']       = 'alpha';
-$modversion['min_php']             = '5.2';
+$modversion['release_date']        = '2015/10/01';
+$modversion['module_website_url']  = 'xoops.org';
+$modversion['module_website_name'] = 'XOOPS Project';
+$modversion['module_status']       = 'Alpha 1';
+$modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.6.0';
-$modversion['min_db']              = array('mysql'=>'5.0.7', 'mysqli'=>'5.0.7');
+$modversion['min_db']              = array('mysql'  => '5.0.7',
+                                           'mysqli' => '5.0.7');
 
 // paypal
 $modversion['paypal']                  = array();
@@ -55,12 +57,12 @@ $modversion['adminindex'] = 'admin/index.php';
 $modversion['adminmenu']  = 'admin/menu.php';
 
 // Manage extension
-$modversion['extension'] = 1;
+$modversion['extension']          = 1;
 $modversion['extension_module'][] = 'system';
 
 // Scripts to run upon installation or update
-$modversion['onInstall'] = 'install/install.php';
-$modversion['onUpdate']  = 'install/update.php';
+$modversion['onInstall']   = 'install/install.php';
+$modversion['onUpdate']    = 'install/update.php';
 $modversion['onUninstall'] = '';
 
 // JQuery
@@ -70,8 +72,8 @@ $modversion['jquery'] = 1;
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 // Tables created by sql file (without prefix!)
-$modversion['tables'][1] = 'xoosocialnetwork';
+//$modversion['tables'][1] = 'xoosocialnetwork';
+$modversion['schema'] = 'sql/schema.yml';
 
 // Menu
 $modversion['hasMain'] = 0;
-?>
