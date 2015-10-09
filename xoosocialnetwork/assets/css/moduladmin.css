@@ -1,0 +1,26 @@
+.xo-moduleadmin-icon {
+    width: 100% !important;
+    max-width: 29%;
+}
+
+.xo-moduleadmin-box {
+    width: 70% !important;
+}
+
+.xo-moduleadmin-image {
+    width: 16px;
+}
+
+.xo-window-data {
+    width: 100%;
+}
+
+code {
+    display: block;
+    width: 95%;
+    max-height: 400px;
+    overflow: auto;
+    padding: 2em;
+    font-weight: bold;
+    font-size: 1em;
+}

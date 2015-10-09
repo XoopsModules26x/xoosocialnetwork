@@ -17,85 +17,100 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-class XoosocialnetworkSocialnetworkForm extends XoopsThemeForm
+/**
+ * Class XooSocialNetworkSocialnetworkForm
+ */
+class XooSocialNetworkSocialnetworkForm extends Xoops\Form\ThemeForm
 {
     /**
      * @param null $obj
      */
     public function __construct($obj = null)
-    {        $this->xoopsObject = $obj;
+    {
+        $this->xoopsObject = $obj;
 
-        $sn_module = Xoosocialnetwork::getInstance();
-        $sn_handler = $sn_module->SNHandler();
+        $snModule  = XooSocialNetwork::getInstance();
+        $snHandler = $snModule->SNHandler();
 
-        if ($this->xoopsObject->isNew() ) {
+        if ($this->xoopsObject->isNew()) {
             parent::__construct('', 'form_socialnetwork', 'index.php', 'post', true);
-        } else {            parent::__construct('', 'form_socialnetwork', 'index.php', 'post', true);
+        } else {
+            parent::__construct('', 'form_socialnetwork', 'index.php', 'post', true);
         }
         $this->setExtra('enctype="multipart/form-data"');
 
         // Title
-        $this->addElement( new XoopsFormText(_AM_XOO_SN_TITLE, 'xoosocialnetwork_title', 5, 255, $this->xoopsObject->getVar('xoosocialnetwork_title')) , true );
+        $this->addElement(new Xoops\Form\Text(_AM_XOO_SN_TITLE, 'xoosocialnetwork_title', 5, 255, $this->xoopsObject->getVar('xoosocialnetwork_title')), true);
 
         // Url
-        $this->addElement( new XoopsFormText(_AM_XOO_SN_URL, 'xoosocialnetwork_url', 7, 255, $this->xoopsObject->getVar('xoosocialnetwork_url')) , true );
+        $this->addElement(new Xoops\Form\Text(_AM_XOO_SN_URL, 'xoosocialnetwork_url', 7, 255, $this->xoopsObject->getVar('xoosocialnetwork_url')), true);
 
         // Query string URL
-        $query_url = new XoopsFormText(_AM_XOO_SN_QUERY_URL, 'xoosocialnetwork_query_url', 5, 20, $this->xoopsObject->getVar('xoosocialnetwork_query_url'));
-        $query_url->setDatalist(array('u','url'));
-        $this->addElement( $query_url , true );
+        $queryUrl = new Xoops\Form\Text(_AM_XOO_SN_QUERY_URL, 'xoosocialnetwork_query_url', 5, 20, $this->xoopsObject->getVar('xoosocialnetwork_query_url'));
+        $queryUrl->setDatalist(array(
+                                   'u',
+                                   'url'));
+        $this->addElement($queryUrl, true);
 
         // Query string title
-        $query_string = new XoopsFormText(_AM_XOO_SN_QUERY_TITLE, 'xoosocialnetwork_query_title', 5, 20, $this->xoopsObject->getVar('xoosocialnetwork_query_title'));
-        $query_string->setDatalist(array('t','title'));
-        $this->addElement( $query_string );
+        $queryString = new Xoops\Form\Text(_AM_XOO_SN_QUERY_TITLE, 'xoosocialnetwork_query_title', 5, 20, $this->xoopsObject->getVar('xoosocialnetwork_query_title'));
+        $queryString->setDatalist(array(
+                                      't',
+                                      'title'));
+        $this->addElement($queryString);
 
         // image
-        $xoops = Xoops::getInstance();
-        $image_tray = new XoopsFormElementTray(_AM_XOO_SN_IMAGE, '' );
-        $image_array = XoopsLists :: getImgListAsArray( $xoops->path('modules/xoosocialnetwork/icons/Default'));
-        $image_select = new XoopsFormSelect( '', 'xoosocialnetwork_image', $this->xoopsObject->getVar('xoosocialnetwork_image') );
-        $image_select->addOptionArray( $image_array );
-        $image_select->setExtra( "onchange='showImgSelected(\"select_image\", \"xoosocialnetwork_image\", \"" . '/' . "\", \"\", \"" . $xoops->url('modules/xoosocialnetwork/icons/Default') . "\")'" );
-        $image_tray->addElement( $image_select );
-        $image_tray->addElement( new XoopsFormLabel( '', "<br /><img src='" . $xoops->url('modules/xoosocialnetwork/icons/Default/') . $this->xoopsObject->getVar('xoosocialnetwork_image') . "' name='select_image' id='select_image' alt='' />" ) );
-        $this->addElement( $image_tray );
+        $xoops       = Xoops::getInstance();
+        $imageTray   = new Xoops\Form\ElementTray(_AM_XOO_SN_IMAGE, '');
+        $imageArray  = XoopsLists:: getImgListAsArray($xoops->path('modules/xoosocialnetwork/assets/icons/Default'));
+        $imageSelect = new Xoops\Form\Select('', 'xoosocialnetwork_image', $this->xoopsObject->getVar('xoosocialnetwork_image'));
+        $imageSelect->addOptionArray($imageArray);
+        $imageSelect->setExtra("onchange='showImgSelected(\"select_image\", \"xoosocialnetwork_image\", \"" . '/' . "\", \"\", \"" . $xoops->url('modules/xoosocialnetwork/assets/icons/Default') . "\")'");
+        $imageTray->addElement($imageSelect);
+        $imageTray->addElement(new Xoops\Form\Label('', "<br /><img src='" . $xoops->url('modules/xoosocialnetwork/assets/icons/Default/') . $this->xoopsObject->getVar('xoosocialnetwork_image') . "' name='select_image' id='select_image' alt='' />"));
+        $this->addElement($imageTray);
 
         // order
-        $this->addElement( new XoopsFormText(_AM_XOO_SN_ORDER, 'xoosocialnetwork_order', 1, 3, $this->xoopsObject->getVar('xoosocialnetwork_order')) );
+        $this->addElement(new Xoops\Form\Text(_AM_XOO_SN_ORDER, 'xoosocialnetwork_order', 1, 3, $this->xoopsObject->getVar('xoosocialnetwork_order')));
 
         // display
-        $this->addElement( new XoopsFormRadioYN(_AM_XOO_SN_DISPLAY, 'xoosocialnetwork_display',  $this->xoopsObject->getVar('xoosocialnetwork_display')) );
+        $this->addElement(new Xoops\Form\RadioYesNo(_AM_XOO_SN_DISPLAY, 'xoosocialnetwork_display', $this->xoopsObject->getVar('xoosocialnetwork_display')));
 
         // hidden
-        $this->addElement( new XoopsFormHidden('xoosocialnetwork_id', $this->xoopsObject->getVar('xoosocialnetwork_id')) );
+        $this->addElement(new Xoops\Form\Hidden('xoosocialnetwork_id', $this->xoopsObject->getVar('xoosocialnetwork_id')));
 
         // button
-        $button_tray = new XoopsFormElementTray('', '');
-        $button_tray->addElement(new XoopsFormHidden('op', 'save'));
-        $button_tray->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-        $button_tray->addElement(new XoopsFormButton('', 'reset', _RESET, 'reset'));
-        $cancel_send = new XoopsFormButton('', 'cancel', _CANCEL, 'button');
+        $button_tray = new Xoops\Form\ElementTray('', '');
+        $button_tray->addElement(new Xoops\Form\Hidden('op', 'save'));
+        $button_tray->addElement(new Xoops\Form\Button('', 'submit', XoopsLocale::A_SUBMIT, 'submit'));
+        $button_tray->addElement(new Xoops\Form\Button('', 'reset', XoopsLocale::A_RESET, 'reset'));
+        $cancel_send = new Xoops\Form\Button('', 'cancel', XoopsLocale::A_CANCEL, 'button');
         $cancel_send->setExtra("onclick='javascript:history.go(-1);'");
         $button_tray->addElement($cancel_send);
         $this->addElement($button_tray);
     }
 
-    public function message($msg, $title = '', $class='errorMsg' )
+    /**
+     * @param        $msg
+     * @param string $title
+     * @param string $class
+     * @return string
+     */
+    public function message($msg, $title = '', $class = 'errorMsg')
     {
         $ret = "<div class='" . $class . "'>";
-        if ( $title != '' ) {
-            $ret .= "<strong>" . $title . "</strong>";
+        if ('' != $title) {
+            $ret .= '<strong>' . $title . '</strong>';
         }
-        if ( is_array( $msg ) || is_object( $msg ) ) {
+        if (is_array($msg) || is_object($msg)) {
             $ret .= implode('<br />', $msg);
         } else {
             $ret .= $msg;
         }
-        $ret .= "</div>";
+        $ret .= '</div>';
+
         return $ret;
     }
 }
-?>

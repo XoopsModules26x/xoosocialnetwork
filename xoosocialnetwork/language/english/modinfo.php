@@ -17,11 +17,10 @@
  * @version         $Id$
  */
 
-define("_MI_XOO_SN_NAME",                 "XooFoo - Social Network");
-define("_MI_XOO_SN_DESC",                 "XooFoo - Social Network<br />System extension for Xoops 2.6.x ++");
+define('_MI_XOO_SN_NAME', 'XooFoo - Social Network');
+define('_MI_XOO_SN_DESC', 'XooFoo - Social Network<br />System extension for Xoops 2.6.x ++');
 
 // Admin menu
-define("_MI_XOO_SN_INDEX",                "Index");
-define("_MI_XOO_SN_ABOUT",                "About");
-define("_MI_SN_CREATE_CONFIG",            "Create config file");
-?>
+define('_MI_XOO_SN_INDEX', 'Index');
+define('_MI_XOO_SN_ABOUT', 'About');
+define('_MI_SN_CREATE_CONFIG', 'Create config file');

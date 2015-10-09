@@ -17,18 +17,17 @@
  * @version         $Id$
  */
 
-$i = 0;
-$adminmenu[$i]['title']   = _MI_XOO_SN_INDEX;
-$adminmenu[$i]['link']    = 'admin/index.php';
-$adminmenu[$i]['icon']    = 'home.png';
+$i                      = 0;
+$adminmenu[$i]['title'] = _MI_XOO_SN_INDEX;
+$adminmenu[$i]['link']  = 'admin/index.php';
+$adminmenu[$i]['icon']  = 'home.png';
 
-$i++;
+++$i;
 $adminmenu[$i]['title'] = _MI_SN_CREATE_CONFIG;
 $adminmenu[$i]['link']  = 'admin/index.php?op=createconfig';
 $adminmenu[$i]['icon']  = 'administration.png';
 
-$i++;
-$adminmenu[$i]['title']   = _MI_XOO_SN_ABOUT;
-$adminmenu[$i]['link']    = 'admin/about.php';
-$adminmenu[$i]['icon']    = 'about.png';
-?>
+++$i;
+$adminmenu[$i]['title'] = _MI_XOO_SN_ABOUT;
+$adminmenu[$i]['link']  = 'admin/about.php';
+$adminmenu[$i]['icon']  = 'about.png';

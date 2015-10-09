@@ -1,0 +1,124 @@
+tables:
+    xoosocialnetwork:
+        options: {  }
+        columns:
+            xoosocialnetwork_id:
+                name: xoosocialnetwork_id
+                type: integer
+                default: null
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: true
+                columnDefinition: null
+                comment: null
+            xoosocialnetwork_title:
+                name: xoosocialnetwork_title
+                type: string
+                default: null
+                notnull: true
+                length: 100
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+                collation: utf8_general_ci
+            xoosocialnetwork_url:
+                name: xoosocialnetwork_url
+                type: string
+                default: null
+                notnull: true
+                length: 100
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+                collation: utf8_general_ci
+            xoosocialnetwork_image:
+                name: xoosocialnetwork_image
+                type: string
+                default: blank.gif
+                notnull: true
+                length: 100
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+                collation: utf8_general_ci
+            xoosocialnetwork_query_url:
+                name: xoosocialnetwork_query_url
+                type: string
+                default: null
+                notnull: true
+                length: 20
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+                collation: utf8_general_ci
+            xoosocialnetwork_query_title:
+                name: xoosocialnetwork_query_title
+                type: string
+                default: null
+                notnull: true
+                length: 20
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+                collation: utf8_general_ci
+            xoosocialnetwork_order:
+                name: xoosocialnetwork_order
+                type: integer
+                default: '0'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+            xoosocialnetwork_display:
+                name: xoosocialnetwork_display
+                type: boolean
+                default: '1'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+        indexes:
+            PRIMARY:
+                name: PRIMARY
+                columns: [xoosocialnetwork_id]
+                unique: true
+                primary: true
+            xoosocialnetwork_title:
+                name: xoosocialnetwork_title
+                columns: [xoosocialnetwork_title]
+                unique: true
+                primary: false

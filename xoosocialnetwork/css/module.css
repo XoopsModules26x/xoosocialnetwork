@@ -1,27 +1,0 @@
-.xooSocialNetwork {    text-align:            right;
-    float:                 right;
-    padding:               5px;}
-
-.xooSocialNetwork img {
-    width:                 20px;
-    opacity:               .3;
-    filter:                alpha(opacity=30);
-}
-
-.xooSocialNetwork img:hover {
-    opacity:               1;
-    filter:                alpha(opacity=100);
-}
-/*========  Float ======== */
-.floatleft {
-    float:                 left;
-    margin:                0;
-    padding-left:          0;
-    border:                0;
-}
-.floatright {
-    float:                 right;
-    margin:                0;
-    padding-right:         0;
-    border:                0;
-}

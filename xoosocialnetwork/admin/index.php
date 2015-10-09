@@ -17,78 +17,78 @@
  * @version         $Id$
  */
 
-include dirname(__FILE__) . '/header.php';
+include __DIR__ . '/header.php';
 
-switch ($op) {    case 'save':
-    if ( !$xoops->security()->check() ) {
-        $xoops->redirect('index.php', 5, implode(',', $xoops->security()->getErrors()));
-    }
+switch ($op) {
+    case 'save':
+        if (!$xoops->security()->check()) {
+            $xoops->redirect('index.php', 5, implode(',', $xoops->security()->getErrors()));
+        }
 
-    $xoosocialnetwork_id = $system->CleanVars($_POST, 'xoosocialnetwork_id', 0, 'int');
-    if( isset($xoosocialnetwork_id) && $xoosocialnetwork_id > 0 ){
-        $data = $sn_handler->get($xoosocialnetwork_id);
-    } else {
-        $data = $sn_handler->create();
-    }
-    $data->CleanVarsForDB();
+        $xoosocialnetwork_id = $system->cleanVars($_POST, 'xoosocialnetwork_id', 0, 'int');
+        if (null !== $xoosocialnetwork_id && $xoosocialnetwork_id > 0) {
+            $data = $snHandler->get($xoosocialnetwork_id);
+        } else {
+            $data = $snHandler->create();
+        }
+        $data->cleanVarsForDB();
 
-    if ($sn_handler->insert($data)) {
-        $sn_handler->createConfig();
-        $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
-    }
-    break;
+        if ($snHandler->insert($data)) {
+            $snHandler->createConfig();
+            $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
+        }
+        break;
 
     case 'add':
-    $data = $sn_handler->create();
-    $form = $sn_module->getForm($data, 'socialnetwork');
+        $data = $snHandler->create();
+        $form = $snModule->getForm($data, 'socialnetwork');
 
-    $admin_page->addInfoBox(_AM_XOO_SN_ADD);
-    $admin_page->addInfoBoxLine( $form->render() );
-    break;
+        $admin_page->addInfoBox(_AM_XOO_SN_ADD);
+        $admin_page->addInfoBoxLine($form->render());
+        break;
 
     case 'edit':
-    $data = $sn_handler->get($xoosocialnetwork_id);
-    $form = $sn_module->getForm($data, 'socialnetwork');
+        $data = $snHandler->get($xoosocialnetwork_id);
+        $form = $snModule->getForm($data, 'socialnetwork');
 
-    $admin_page->addInfoBox(_AM_XOO_SN_EDIT . ' : ' . $data->getVar('xoosocialnetwork_title'));
-    $admin_page->addInfoBoxLine( $form->render() );
-    break;
+        $admin_page->addInfoBox(_AM_XOO_SN_EDIT . ' : ' . $data->getVar('xoosocialnetwork_title'));
+        $admin_page->addInfoBoxLine($form->render());
+        break;
 
     case 'view':
-    $data = $sn_handler->get($xoosocialnetwork_id);
-    $data->setView();
-    $sn_handler->insert($data);
-    $sn_handler->createConfig();
-    $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
-    break;
+        $data = $snHandler->get($xoosocialnetwork_id);
+        $data->setView();
+        $snHandler->insert($data);
+        $snHandler->createConfig();
+        $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
+        break;
 
     case 'hide':
-    $data = $sn_handler->get($xoosocialnetwork_id);
-    $data->setHide();
-    $sn_handler->insert($data);
-    $sn_handler->createConfig();
-    $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
-    break;
+        $data = $snHandler->get($xoosocialnetwork_id);
+        $data->setHide();
+        $snHandler->insert($data);
+        $snHandler->createConfig();
+        $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
+        break;
 
     case 'createconfig':
-    $sn_handler->createConfig();
-    $xoops->redirect('index.php', 5, _AM_XOO_SN_CREATED);
-    break;
+        $snHandler->createConfig();
+        $xoops->redirect('index.php', 5, _AM_XOO_SN_CREATED);
+        break;
 
     default:
-    $socialnetwork = $sn_handler->renderAdminList();
-    $xoops->tpl()->assign('socialnetwork', $socialnetwork );
+        $socialnetwork = $snHandler->renderAdminList();
+        $xoops->tpl()->assign('socialnetwork', $socialnetwork);
 
-    $admin_page->addItemButton(_AM_XOO_SN_ADD, 'index.php?op=add', 'add');
-    ob_start();
-    $admin_page->displayButton();
-    $admin_button = ob_get_contents();
-    ob_end_clean();
+        $admin_page->addItemButton(_AM_XOO_SN_ADD, 'index.php?op=add', 'add');
+        ob_start();
+        $admin_page->displayButton();
+        $admin_button = ob_get_contents();
+        ob_end_clean();
 
-    $admin_page->addInfoBox(_AM_XOO_SN_MANAGER);
-    $admin_page->addInfoBoxLine( $xoops->tpl()->fetch('admin:xoosocialnetwork|xoosocialnetwork_index.html') );
-    break;
+        $admin_page->addInfoBox(_AM_XOO_SN_MANAGER);
+        $admin_page->addInfoBoxLine($xoops->tpl()->fetch('admin:xoosocialnetwork/xoosocialnetwork_index.tpl'));
+        break;
 }
 $admin_page->displayIndex();
-include dirname(__FILE__) . '/footer.php';
-?>
+include __DIR__ . '/footer.php';
