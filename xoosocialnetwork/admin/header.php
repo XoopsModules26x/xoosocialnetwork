@@ -41,9 +41,9 @@ $xoops->header();
 $xoops->theme()->addStylesheet('modules/xoosocialnetwork/assets/css/moduladmin.css');
 
 $admin_page = new \Xoops\Module\Admin();
-if ('about' != $script_name && 'index' != $script_name) {
+if ('about' !== $script_name && 'index' !== $script_name) {
     $admin_page->renderNavigation(basename($_SERVER['SCRIPT_NAME']));
-} elseif ('index' != $script_name) {
+} elseif ('index' !== $script_name) {
     $admin_page->displayNavigation(basename($_SERVER['SCRIPT_NAME']));
 }
 

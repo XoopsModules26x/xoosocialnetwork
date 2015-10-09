@@ -35,7 +35,7 @@
             <td class="txtcenter">
                 <a href="index.php?op=edit&amp;xoosocialnetwork_id=<{$field.xoosocialnetwork_id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoImgUrl 'media/xoops/images/icons/16/edit.png'}>" alt="<{$smarty.const._EDIT}>"></a>
 
-                    <{*<a href="index.php?op=del&amp;xoosocialnetwork_id=<{$field.xoosocialnetwork_id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoImgUrl media/xoops/images/icons/16/delete.png}>" alt="<{$smarty.const._DELETE}>"></a>*}>
+                    <{*<a href="index.php?op=del&amp;xoosocialnetwork_id=<{$field.xoosocialnetwork_id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoImgUrl 'media/xoops/images/icons/16/delete.png'}>" alt="<{$smarty.const._DELETE}>"></a>*}>
 
             </td>
         </tr>

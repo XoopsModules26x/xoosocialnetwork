@@ -78,18 +78,18 @@ class XooSocialNetwork_sn extends XoopsObject
         $sn_config = $snModule->loadConfig();
 
         $ret = parent::getValues();
-        if ($ret['xoosocialnetwork_image'] != 'blank.gif') {
+        if ($ret['xoosocialnetwork_image'] !== 'blank.gif') {
             $ret['xoosocialnetwork_image_link'] = $xoops->url('modules/xoosocialnetwork/assets/icons/' . $sn_config['xoosocialnetwork_theme']) . '/' . $ret['xoosocialnetwork_image'];
         }
 
         return $ret;
     }
 
-    public function CleanVarsForDB()
+    public function cleanVarsForDB()
     {
         $system = System::getInstance();
         foreach (parent::getValues() as $k => $v) {
-            if ($k != 'dohtml') {
+            if ($k !== 'dohtml') {
                 if ($this->vars[$k]['data_type'] == XOBJ_DTYPE_STIME || $this->vars[$k]['data_type'] == XOBJ_DTYPE_MTIME || $this->vars[$k]['data_type'] == XOBJ_DTYPE_LTIME) {
                     $value = $system->cleanVars($_POST[$k], 'date', date('Y-m-d'), 'date') + $system->cleanVars($_POST[$k], 'time', date('u'), 'int');
                     $this->setVar($k, isset($_POST[$k]) ? $value : $v);

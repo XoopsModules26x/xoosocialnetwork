@@ -136,7 +136,7 @@ class XooSocialNetworkPreferences
      * @param mixed|string $pathout
      * @return bool
      */
-    private function CreatePath($pathname, $pathout = XOOPS_ROOT_PATH)
+    private function createPath($pathname, $pathout = XOOPS_ROOT_PATH)
     {
         $xoops    = Xoops::getInstance();
         $pathname = substr($pathname, strlen(XOOPS_ROOT_PATH));
@@ -167,7 +167,7 @@ class XooSocialNetworkPreferences
      * @param $folder_out
      * @return bool
      */
-    private function WriteIndex($folder_in, $source_file, $folder_out)
+    private function writeIndex($folder_in, $source_file, $folder_out)
     {
         if (!is_dir($folder_out)) {
             if (!$this->CreatePath($folder_out)) {

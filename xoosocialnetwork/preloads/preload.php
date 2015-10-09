@@ -31,7 +31,7 @@ class XooSocialNetworkPreload extends PreloadItem
     {
         $xoops    = Xoops::getInstance();
         $snModule = XooSocialNetwork::getInstance();
-        if (null !== $xoops->module && is_object($xoops->module) && basename($xoops->getEnv('PHP_SELF')) != 'index.php') {
+        if (null !== $xoops->module && is_object($xoops->module) && basename($xoops->getEnv('PHP_SELF')) !== 'index.php') {
             if (XooSocialNetworkPreload::isActive()) {
                 $url = $xoops->getEnv('HTTPS') ? 'https://' : 'http://';
                 $url .= $xoops->getEnv('SERVER_NAME');
@@ -68,7 +68,7 @@ class XooSocialNetworkPreload extends PreloadItem
     {
         $path = dirname(__DIR__);
         XoopsLoad::addMap(array(
-                              'xoosocialnetwork' => $path . '/class/helper.php',));
+                              'xoosocialnetwork' => $path . '/class/helper.php'));
     }
 
     /**
