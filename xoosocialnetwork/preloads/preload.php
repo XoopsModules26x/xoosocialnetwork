@@ -76,9 +76,9 @@ class XooSocialNetworkPreload extends PreloadItem
      */
     private static function isActive()
     {
-        $xoops          = Xoops::getInstance();
-        $module_handler = $xoops->getHandlerModule();
-        $module         = $module_handler->getByDirname('xoosocialnetwork');
+        $xoops         = Xoops::getInstance();
+        $moduleHandler = $xoops->getHandlerModule();
+        $module        = $moduleHandler->getByDirname('xoosocialnetwork');
 
         return ($module && $module->getVar('isactive')) ? true : false;
     }

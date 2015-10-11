@@ -22,9 +22,9 @@ use Xoops\Core\Kernel\XoopsObject;
 use Xoops\Core\Kernel\XoopsPersistableObjectHandler;
 
 /**
- * Class XooSocialNetwork_sn
+ * Class XoosocialnetworkSn
  */
-class XooSocialNetwork_sn extends XoopsObject
+class XoosocialnetworkSn extends XoopsObject
 {
     // constructor
     /**
@@ -109,20 +109,20 @@ class XooSocialNetwork_sn extends XoopsObject
 }
 
 /**
- * Class XooSocialNetworkXoosocialnetwork_snHandler
+ * Class XoosocialnetworkSnHandler
  */
-class XooSocialNetworkXoosocialnetwork_snHandler extends XoopsPersistableObjectHandler
+class XoosocialnetworkSnHandler extends XoopsPersistableObjectHandler
 {
     /**
      * @param null|\Xoops\Core\Database\Connection $db
      */
     public function __construct(Connection $db = null)
     {
-        $this->configPath    = XOOPS_VAR_PATH . '/configs/xoosocialnetwork/';
+        $this->configPath    = \XoopsBaseConfig::get('var-path') . '/configs/xoosocialnetwork/';
         $this->configFile    = 'xoosocialnetwork';
         $this->configFileExt = '.php';
 
-        parent::__construct($db, 'xoosocialnetwork', 'Xoosocialnetwork_sn', 'xoosocialnetwork_id', 'xoosocialnetwork_title');
+        parent::__construct($db, 'xoosocialnetwork', 'XoosocialnetworkSn', 'xoosocialnetwork_id', 'xoosocialnetwork_title');
     }
 
     /**

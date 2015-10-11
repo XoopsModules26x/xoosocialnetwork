@@ -45,6 +45,6 @@ class XooSocialNetwork extends Xoops\Module\Helper\HelperAbstract
      */
     public function SNHandler()
     {
-        return $this->getHandler('xoosocialnetwork_sn');
+        return $this->getHandler('Sn');
     }
 }

@@ -17,5 +17,4 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 $xoops->footer();
