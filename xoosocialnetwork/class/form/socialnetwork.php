@@ -17,7 +17,6 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Class XooSocialNetworkSocialnetworkForm
@@ -25,14 +24,14 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 class XooSocialNetworkSocialnetworkForm extends Xoops\Form\ThemeForm
 {
     /**
-     * @param null $obj
+     * @param XooSocialNetworkSocialnetwork|XoopsObject $obj
      */
     public function __construct($obj = null)
     {
         $this->xoopsObject = $obj;
 
         $snModule  = XooSocialNetwork::getInstance();
-        $snHandler = $snModule->SNHandler();
+        $snHandler = $snModule->snHandler();
 
         if ($this->xoopsObject->isNew()) {
             parent::__construct('', 'form_socialnetwork', 'index.php', 'post', true);
@@ -64,7 +63,7 @@ class XooSocialNetworkSocialnetworkForm extends Xoops\Form\ThemeForm
         // image
         $xoops       = Xoops::getInstance();
         $imageTray   = new Xoops\Form\ElementTray(_AM_XOO_SN_IMAGE, '');
-        $imageArray  = XoopsLists:: getImgListAsArray($xoops->path('modules/xoosocialnetwork/assets/icons/Default'));
+        $imageArray  = XoopsLists::getImgListAsArray($xoops->path('modules/xoosocialnetwork/assets/icons/Default'));
         $imageSelect = new Xoops\Form\Select('', 'xoosocialnetwork_image', $this->xoopsObject->getVar('xoosocialnetwork_image'));
         $imageSelect->addOptionArray($imageArray);
         $imageSelect->setExtra("onchange='showImgSelected(\"select_image\", \"xoosocialnetwork_image\", \"" . '/' . "\", \"\", \"" . $xoops->url('modules/xoosocialnetwork/assets/icons/Default') . "\")'");
@@ -82,14 +81,14 @@ class XooSocialNetworkSocialnetworkForm extends Xoops\Form\ThemeForm
         $this->addElement(new Xoops\Form\Hidden('xoosocialnetwork_id', $this->xoopsObject->getVar('xoosocialnetwork_id')));
 
         // button
-        $button_tray = new Xoops\Form\ElementTray('', '');
-        $button_tray->addElement(new Xoops\Form\Hidden('op', 'save'));
-        $button_tray->addElement(new Xoops\Form\Button('', 'submit', XoopsLocale::A_SUBMIT, 'submit'));
-        $button_tray->addElement(new Xoops\Form\Button('', 'reset', XoopsLocale::A_RESET, 'reset'));
-        $cancel_send = new Xoops\Form\Button('', 'cancel', XoopsLocale::A_CANCEL, 'button');
-        $cancel_send->setExtra("onclick='javascript:history.go(-1);'");
-        $button_tray->addElement($cancel_send);
-        $this->addElement($button_tray);
+        $buttonTray = new Xoops\Form\ElementTray('', '');
+        $buttonTray->addElement(new Xoops\Form\Hidden('op', 'save'));
+        $buttonTray->addElement(new Xoops\Form\Button('', 'submit', XoopsLocale::A_SUBMIT, 'submit'));
+        $buttonTray->addElement(new Xoops\Form\Button('', 'reset', XoopsLocale::A_RESET, 'reset'));
+        $buttonCancelSend = new Xoops\Form\Button('', 'cancel', XoopsLocale::A_CANCEL, 'button');
+        $buttonCancelSend->setExtra("onclick='javascript:history.go(-1);'");
+        $buttonTray->addElement($buttonCancelSend);
+        $this->addElement($buttonTray);
     }
 
     /**

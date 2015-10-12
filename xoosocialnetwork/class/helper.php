@@ -16,7 +16,6 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id: xoosocialnetwork.php 1397 2012-12-30 07:36:56Z DuGris $
  */
-//defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 class XooSocialNetwork extends Xoops\Module\Helper\HelperAbstract
 {
@@ -43,8 +42,8 @@ class XooSocialNetwork extends Xoops\Module\Helper\HelperAbstract
     /**
      * @return \Xoops\Module\Helper\XoopsObjectHandler
      */
-    public function SNHandler()
+    public function snHandler()
     {
-        return $this->getHandler('xoosocialnetwork_sn');
+        return $this->getHandler('Sn');
     }
 }

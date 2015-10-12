@@ -41,7 +41,7 @@ class XooSocialNetworkPreload extends PreloadItem
                     $url .= $xoops->getEnv('PHP_SELF');
                 }
 
-                $snHandler = $snModule->SNHandler();
+                $snHandler = $snModule->snHandler();
                 foreach ($snHandler->loadConfig() as $k => $v) {
                     $sn[$k]['xoosocialnetwork_title']      = $v['xoosocialnetwork_title'];
                     $sn[$k]['xoosocialnetwork_image_link'] = $v['xoosocialnetwork_image_link'];
@@ -76,9 +76,9 @@ class XooSocialNetworkPreload extends PreloadItem
      */
     private static function isActive()
     {
-        $xoops          = Xoops::getInstance();
-        $module_handler = $xoops->getHandlerModule();
-        $module         = $module_handler->getByDirname('xoosocialnetwork');
+        $xoops         = Xoops::getInstance();
+        $moduleHandler = $xoops->getHandlerModule();
+        $module        = $moduleHandler->getByDirname('xoosocialnetwork');
 
         return ($module && $module->getVar('isactive')) ? true : false;
     }

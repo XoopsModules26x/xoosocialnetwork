@@ -17,6 +17,8 @@
  * @version         $Id$
  */
 
+use Xoops\Core\Request;
+
 include __DIR__ . '/header.php';
 
 switch ($op) {
@@ -25,7 +27,7 @@ switch ($op) {
             $xoops->redirect('index.php', 5, implode(',', $xoops->security()->getErrors()));
         }
 
-        $xoosocialnetwork_id = $system->cleanVars($_POST, 'xoosocialnetwork_id', 0, 'int');
+        $xoosocialnetwork_id = Request::getInt('xoosocialnetwork_id', 0, 'POST'); //$system->cleanVars($_POST, 'xoosocialnetwork_id', 0, 'int');
         if (null !== $xoosocialnetwork_id && $xoosocialnetwork_id > 0) {
             $data = $snHandler->get($xoosocialnetwork_id);
         } else {
