@@ -41,7 +41,7 @@ class XooSocialNetworkPreload extends PreloadItem
                     $url .= $xoops->getEnv('PHP_SELF');
                 }
 
-                $snHandler = $snModule->SNHandler();
+                $snHandler = $snModule->snHandler();
                 foreach ($snHandler->loadConfig() as $k => $v) {
                     $sn[$k]['xoosocialnetwork_title']      = $v['xoosocialnetwork_title'];
                     $sn[$k]['xoosocialnetwork_image_link'] = $v['xoosocialnetwork_image_link'];

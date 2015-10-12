@@ -17,6 +17,8 @@
  * @version         $Id$
  */
 
+use Xoops\Core\Request;
+
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $op = '';
@@ -30,7 +32,7 @@ if (null !== $_GET) {
         ${$k} = $v;
     }
 }
-$script_name = basename($_SERVER['SCRIPT_NAME'], '.php');
+$script_name = basename(Request::getString('SCRIPT_NAME', '', 'SERVER'), '.php');
 
 XoopsLoad::load('xoopreferences', 'xoosocialnetwork');
 XoopsLoad::load('system', 'system');
@@ -42,10 +44,10 @@ $xoops->theme()->addStylesheet('modules/xoosocialnetwork/assets/css/moduladmin.c
 
 $admin_page = new \Xoops\Module\Admin();
 if ('about' !== $script_name && 'index' !== $script_name) {
-    $admin_page->renderNavigation(basename($_SERVER['SCRIPT_NAME']));
+    $admin_page->renderNavigation(basename(Request::getString('SCRIPT_NAME', '', 'SERVER')));
 } elseif ('index' !== $script_name) {
-    $admin_page->displayNavigation(basename($_SERVER['SCRIPT_NAME']));
+    $admin_page->displayNavigation(basename(Request::getString('SCRIPT_NAME', '', 'SERVER')));
 }
 
 $snModule  = XooSocialNetwork::getInstance();
-$snHandler = $snModule->SNHandler();
+$snHandler = $snModule->snHandler();
