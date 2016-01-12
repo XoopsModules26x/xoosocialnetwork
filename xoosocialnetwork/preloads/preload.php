@@ -14,7 +14,6 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id: core.php 1428 2013-01-15 01:10:52Z DuGris $
  */
 
 use Xoops\Core\PreloadItem;
