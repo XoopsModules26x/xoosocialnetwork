@@ -14,36 +14,10 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id: xoosocialnetwork.php 1397 2012-12-30 07:36:56Z DuGris $
  */
 
-class XooSocialNetwork extends Xoops\Module\Helper\HelperAbstract
-{
-    /**
-     * Init the module
-     *
-     * @return null|void
-     */
-    public function init()
-    {
-        $this->setDirname(basename(dirname(__DIR__)));
-    }
+include __DIR__ . '/header.php';
 
-    /**
-     * @return mixed
-     */
-    public function loadConfig()
-    {
-        XoopsLoad::load('xoopreferences', $this->_dirname);
+$admin_page->displayAbout();
 
-        return XooSocialnetworkPreferences::getInstance()->getConfig();
-    }
-
-    /**
-     * @return \Xoops\Module\Helper\XoopsObjectHandler
-     */
-    public function snHandler()
-    {
-        return $this->getHandler('Sn');
-    }
-}
+include __DIR__ . '/footer.php';

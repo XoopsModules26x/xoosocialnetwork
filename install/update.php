@@ -14,7 +14,14 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
  */
 
-$xoops->footer();
+include_once __DIR__ . '/install.php';
+
+/**
+ * @return bool
+ */
+function xoops_module_update_xoosocialnetwork()
+{
+    return xoops_module_install_xoosocialnetwork();
+}

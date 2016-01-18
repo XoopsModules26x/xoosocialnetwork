@@ -14,7 +14,6 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
  */
 
 define('_MI_XOO_SN_NAME', 'XooFoo - Social Network');

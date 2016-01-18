@@ -14,11 +14,6 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
  */
 
-include __DIR__ . '/header.php';
-
-$admin_page->displayAbout();
-
-include __DIR__ . '/footer.php';
+$xoops->footer();

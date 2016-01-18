@@ -14,15 +14,35 @@
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
  */
 
-include_once __DIR__ . '/install.php';
-
-/**
- * @return bool
- */
-function xoops_module_update_xoosocialnetwork()
+class XooSocialNetwork extends Xoops\Module\Helper\HelperAbstract
 {
-    return xoops_module_install_xoosocialnetwork();
+    /**
+     * Init the module
+     *
+     * @return null|void
+     */
+    public function init()
+    {
+        $this->setDirname(basename(dirname(__DIR__)));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function loadConfig()
+    {
+        XoopsLoad::load('xoopreferences', $this->_dirname);
+
+        return XooSocialnetworkPreferences::getInstance()->getConfig();
+    }
+
+    /**
+     * @return \Xoops\Module\Helper\XoopsObjectHandler
+     */
+    public function snHandler()
+    {
+        return $this->getHandler('Sn');
+    }
 }
