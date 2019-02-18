@@ -9,13 +9,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- */
 
+ */
 use Xoops\Core\Request;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
@@ -33,11 +33,10 @@ if (null !== $_GET) {
 }
 $script_name = basename(Request::getString('SCRIPT_NAME', '', 'SERVER'), '.php');
 
-XoopsLoad::load('xoopreferences', 'xoosocialnetwork');
-XoopsLoad::load('system', 'system');
-$system = System::getInstance();
+\XoopsLoad::load('system', 'system');
+$system = \System::getInstance();
 
-$xoops = Xoops::getInstance();
+$xoops = \Xoops::getInstance();
 $xoops->header();
 $xoops->theme()->addStylesheet('modules/xoosocialnetwork/assets/css/moduladmin.css');
 
@@ -48,5 +47,6 @@ if ('about' !== $script_name && 'index' !== $script_name) {
     $admin_page->displayNavigation(basename(Request::getString('SCRIPT_NAME', '', 'SERVER')));
 }
 
-$snModule  = XooSocialNetwork::getInstance();
-$snHandler = $snModule->snHandler();
+$helper = \XoopsModules\Xoosocialnetwork\Helper::getInstance();
+/** @var \XoopsModules\Xoosocialnetwork\SocialnetworkHandler $socialnetworkHandler */
+$socialnetworkHandler = $helper->getHandler('Socialnetwork');

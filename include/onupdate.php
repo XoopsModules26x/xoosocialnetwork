@@ -16,4 +16,12 @@
  * @author          Laurent JEN (Aka DuGris)
 
  */
-$xoops->footer();
+require_once __DIR__ . '/install.php';
+
+/**
+ * @return bool
+ */
+function xoops_module_update_xoosocialnetwork()
+{
+    return xoops_module_install_xoosocialnetwork();
+}

@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xoosocialnetwork;
+
 /**
  * Xoopreferences : Preferences Manager
  *
@@ -9,37 +12,34 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- */
 
+ */
 
 /**
- * Class XooSocialNetworkPreferences
+ * Class Preferences
  */
-class XooSocialNetworkPreferences
+class Preferences
 {
-    public  $config         = array();
-    public  $basicConfig    = array();
-    public  $configPath;
-    public  $configFile;
-    private $module_dirname = 'xoosocialnetwork';
+    public $config = [];
+    public $basicConfig = [];
+    public $configPath;
+    public $configFile;
+    private $moduleDirName = 'xoosocialnetwork';
 
-    /**
-     *
-     */
     protected function __construct()
     {
-        $xoops            = Xoops::getInstance();
-        $this->configFile = 'config.' . $this->module_dirname . '.php';
+        $xoops = \Xoops::getInstance();
+        $this->configFile = 'config.' . $this->moduleDirName . '.php';
 
-        $this->configPath = \XoopsBaseConfig::get('var-path') . '/configs/' . $this->module_dirname . '/';
+        $this->configPath = \XoopsBaseConfig::get('var-path') . '/configs/' . $this->moduleDirName . '/';
 
         $this->basicConfig = $this->loadBasicConfig();
-        $this->config      = @$this->loadConfig();
+        $this->config = @$this->loadConfig();
 
         if (count($this->config) != count($this->basicConfig)) {
             $this->config = array_merge($this->basicConfig, $this->config);
@@ -47,11 +47,14 @@ class XooSocialNetworkPreferences
         }
     }
 
+    /**
+     * @return mixed
+     */
     public static function getInstance()
     {
         static $instance;
         if (null === $instance) {
-            $class    = __CLASS__;
+            $class = __CLASS__;
             $instance = new $class();
         }
 
@@ -67,7 +70,7 @@ class XooSocialNetworkPreferences
     }
 
     /**
-     * XooSocialNetworkPreferences::loadConfig()
+     * Xoosocialnetwork\Preferences::loadConfig()
      *
      * @return array
      */
@@ -82,7 +85,7 @@ class XooSocialNetworkPreferences
     }
 
     /**
-     * XooSocialNetworkPreferences::loadBasicConfig()
+     * Xoosocialnetwork\Preferences::loadBasicConfig()
      *
      * @return array
      */
@@ -96,32 +99,32 @@ class XooSocialNetworkPreferences
     }
 
     /**
-     * XooSocialNetworkPreferences::readConfig()
+     * Xoosocialnetwork\Preferences::readConfig()
      *
      * @return array
      */
     public function readConfig()
     {
         $file_path = $this->configPath . $this->configFile;
-        XoopsLoad::load('XoopsFile');
-        $file = XoopsFile::getHandler('file', $file_path);
+        \XoopsLoad::load('XoopsFile');
+        $file = \XoopsFile::getHandler('file', $file_path);
 
         return eval(@$file->read());
     }
 
     /**
-     * XooSocialNetworkPreferences::writeConfig()
+     * Xoosocialnetwork\Preferences::writeConfig()
      *
      * @param  array $config
-     * @return array
+     * @return bool|null
      * @internal param string $filename
      */
     public function writeConfig($config)
     {
         if ($this->createPath($this->configPath)) {
             $file_path = $this->configPath . $this->configFile;
-            XoopsLoad::load('XoopsFile');
-            $file = XoopsFile::getHandler('file', $file_path);
+            \XoopsLoad::load('XoopsFile');
+            $file = \XoopsFile::getHandler('file', $file_path);
 
             return $file->write('return ' . var_export($config, true) . ';');
         }
@@ -136,22 +139,21 @@ class XooSocialNetworkPreferences
      */
     private function createPath($pathname, $pathout = XOOPS_ROOT_PATH)
     {
-        $xoops    = Xoops::getInstance();
-        $pathname = substr($pathname, strlen(\XoopsBaseConfig::get('root-path')));
+        $xoops = \Xoops::getInstance();
+        $pathname = mb_substr($pathname, mb_strlen(\XoopsBaseConfig::get('root-path')));
         $pathname = str_replace(DIRECTORY_SEPARATOR, '/', $pathname);
 
-        $dest  = $pathout;
+        $dest = $pathout;
         $paths = explode('/', $pathname);
 
         foreach ($paths as $path) {
             if (!empty($path)) {
                 $dest = $dest . '/' . $path;
                 if (!is_dir($dest)) {
-                    if (!mkdir($dest, 0755)) {
+                    if (!mkdir($dest, 0755) && !is_dir($dest)) {
                         return false;
-                    } else {
-                        $this->writeIndex(\XoopsBaseConfig::get('uploads-path'), 'index.html', $dest);
                     }
+                    $this->writeIndex(\XoopsBaseConfig::get('uploads-path'), 'index.html', $dest);
                 }
             }
         }

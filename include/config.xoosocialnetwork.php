@@ -1,4 +1,4 @@
 <?php
 
-return $config = array(
-    'xoosocialnetwork_theme' => 'Default');
+return $config = [
+    'xoosocialnetwork_theme' => 'Default', ];
