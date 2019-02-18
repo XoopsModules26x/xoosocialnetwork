@@ -9,14 +9,15 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         Xoosocialnetwork
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- */
 
+ */
 use Xoops\Core\Request;
+use XoopsModules\Xoosocialnetwork\Form;
 
 include __DIR__ . '/header.php';
 
@@ -28,57 +29,53 @@ switch ($op) {
 
         $xoosocialnetwork_id = Request::getInt('xoosocialnetwork_id', 0, 'POST'); //$system->cleanVars($_POST, 'xoosocialnetwork_id', 0, 'int');
         if (null !== $xoosocialnetwork_id && $xoosocialnetwork_id > 0) {
-            $data = $snHandler->get($xoosocialnetwork_id);
+            $obj = $socialnetworkHandler->get($xoosocialnetwork_id);
         } else {
-            $data = $snHandler->create();
+            $obj = $socialnetworkHandler->create();
         }
-        $data->cleanVarsForDB();
+        $obj->cleanVarsForDB();
 
-        if ($snHandler->insert($data)) {
-            $snHandler->createConfig();
+        if ($socialnetworkHandler->insert($obj)) {
+            $socialnetworkHandler->createConfig();
             $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
         }
         break;
-
     case 'add':
-        $data = $snHandler->create();
-        $form = $snModule->getForm($data, 'socialnetwork');
+        $obj = $socialnetworkHandler->create();
+//        $form = $helper->getForm($obj, 'SocialnetworkForm');
+        $form = new Form\SocialnetworkForm($obj);
 
         $admin_page->addInfoBox(_AM_XOO_SN_ADD);
         $admin_page->addInfoBoxLine($form->render());
         break;
-
     case 'edit':
-        $data = $snHandler->get($xoosocialnetwork_id);
-        $form = $snModule->getForm($data, 'socialnetwork');
+        $obj = $socialnetworkHandler->get($xoosocialnetwork_id);
+//        $form = $helper->getForm($obj, 'socialnetwork');
+        $form = new Form\SocialnetworkForm($obj);
 
-        $admin_page->addInfoBox(_AM_XOO_SN_EDIT . ' : ' . $data->getVar('xoosocialnetwork_title'));
+        $admin_page->addInfoBox(_AM_XOO_SN_EDIT . ' : ' . $obj->getVar('xoosocialnetwork_title'));
         $admin_page->addInfoBoxLine($form->render());
         break;
-
     case 'view':
-        $data = $snHandler->get($xoosocialnetwork_id);
-        $data->setView();
-        $snHandler->insert($data);
-        $snHandler->createConfig();
+        $obj = $socialnetworkHandler->get($xoosocialnetwork_id);
+        $obj->setView();
+        $socialnetworkHandler->insert($obj);
+        $socialnetworkHandler->createConfig();
         $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
         break;
-
     case 'hide':
-        $data = $snHandler->get($xoosocialnetwork_id);
-        $data->setHide();
-        $snHandler->insert($data);
-        $snHandler->createConfig();
+        $obj = $socialnetworkHandler->get($xoosocialnetwork_id);
+        $obj->setHide();
+        $socialnetworkHandler->insert($obj);
+        $socialnetworkHandler->createConfig();
         $xoops->redirect('index.php', 5, _AM_XOO_SN_SAVED);
         break;
-
     case 'createconfig':
-        $snHandler->createConfig();
+        $socialnetworkHandler->createConfig();
         $xoops->redirect('index.php', 5, _AM_XOO_SN_CREATED);
         break;
-
     default:
-        $socialnetwork = $snHandler->renderAdminList();
+        $socialnetwork = $socialnetworkHandler->renderAdminList();
         $xoops->tpl()->assign('socialnetwork', $socialnetwork);
 
         $admin_page->addItemButton(_AM_XOO_SN_ADD, 'index.php?op=add', 'add');
